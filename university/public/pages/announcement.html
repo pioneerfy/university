@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>公告管理</title>
+    <link rel="stylesheet" href="../libs/bootstrap/css/bootstrap.css"> <!--bootstrap-->
+    <link rel="stylesheet" href="../css/base.css"> <!--默认-->
+    <link rel="stylesheet" href="../fonts/iconfont.css">  <!-- icon -->
+    <link rel="stylesheet" href="../plugins/up/easyUpload.js/easy-upload.css">  <!-- 上传附件 -->
+    <link rel="stylesheet" href="../css/announcement.css">
+</head>
+<body>
+    <div id="publish-wrap">
+        <header class="header"><h1 class="header-h1"><i class="iconfont icon-notice icon-tit" ></i><span>公告管理</span></h1></header>
+        <div class="tabs">
+            <ul id="tabs" class="tabs-change">
+                <li id="check-pub"><a href="#" name="#tab1">查看公告</a></li>
+                <li id="d-pub"><a href="#" name="#tab2">发布公告</a></li>
+            </ul>
+            <div id="content">
+                <!-- 查看已发布公告 -->
+                <div id="tab1" class="tabs-content">
+                    <div class="tabs-title"><span>已发布的公告:</span><span class="fr renovate">刷新</span></div>
+                    <!-- 公告栏 -->
+                    <ul class="pubed" id="pub-wd">
+                        <li class="pub-fentiao"></li>
+                        <li class="pub-fentiao"></li>
+                        <li class="pub-fentiao"></li>
+                        <li class="pub-fentiao"></li>
+                        <li class="pub-fentiao"></li>
+                        <li class="pub-fentiao"></li>
+                    </ul>
+                    <!-- 公告详情模态框 -->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <input class="modal-title h4 gai" id="myModalLabel" ></input>
+                                </div>
+                                <textarea class="modal-body gai"></textarea>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">确认更改</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="yema-wrap">
+                        <div id="prev" class="anm">«</div>
+                        <ul id="yeyeye" class="clear">
+                            <li class="on yema">1</li>
+                        </ul>
+                        <div id="next" class="anm">»</div>
+                    </div>
+                </div>
+
+                <!-- 发布新公告 -->
+                <div id="tab2" class="tabs-content">
+                    <div class="tabs-title">发布新公告：</div>
+                    <div class="publish">
+                        <div>
+                            <span>发送给：</span>
+                            <!-- 选择专业 -->
+                            <div class="btn-group">
+                                <button type="button" id="btn-major" class="btn btn-default dropdown-toggle pub-chose" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span>选择专业</span> <span class="caret"></span>
+                                </button>
+                                <ul id="major" class="dropdown-menu">
+                                    <li class="pub-target"><a href="javascript:void(0);">电子商务</a></li>
+                                    <li class="pub-target"><a href="javascript:void(0);">会计学</a></li>
+                                    <li class="pub-target"><a href="javascript:void(0);">信息工程</a></li>
+                                    <li class="pub-target"><a href="javascript:void(0);">商务英语</a></li>
+                                    <li class="pub-target"><a href="javascript:void(0);">计算机科学与技术</a></li>
+                                    <li class="pub-target"><a href="javascript:void(0);">算法工程</a></li>
+                                    <li class="pub-target"><a href="javascript:void(0);">播音主持</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li class="pub-target all-target"><a href="javascript:void(0);">全校师生</a></li>
+                                </ul>
+                            </div>
+                            <!-- 选择班级 -->
+                            <div class="btn-group">
+                                <button type="button" id="btn-class" class="btn btn-default dropdown-toggle pub-chose" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span>选择班级</span><span class="caret"></span>
+                                </button>
+                                <ul id="class" class="dropdown-menu">
+                                    <li class="grade"><a href="javascript:void(0);">大一</a></li>
+                                    <li class="grade"><a href="javascript:void(0);">大二</a></li>
+                                    <li class="grade"><a href="javascript:void(0);">大三</a></li>
+                                    <li class="grade"><a href="javascript:void(0);">大四</a></li>
+                                </ul>
+                            </div>
+                            <!-- 上传附件 -->
+                            <div id="easy-up"><span id="up-btn">上传附件</span>
+                                <div id="easyContainer"></div>
+                            </div>
+                        </div>
+                        <!-- 公告标题 -->
+                        <input type="text" placeholder="公告标题..." class="inp-tit">
+                        <textarea name="publish-content" placeholder="请输入公告内容..." class="pub-content"></textarea>
+                        <div class="pub-sub clear">
+                            <button type="button" id="pub-cancel" class="btn btn-success fr">取消</button>
+                            <button type="button" id="pub-affirm" class="btn btn-success fr">提交</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../libs/jQuery/jquery-1.11.1.js"></script> <!-- jq -->
+    <script src="../libs/bootstrap/js/bootstrap.js"></script>  <!-- Bootstrap框架 -->
+    <script src="../plugins/up/easyUpload.js/vendor/jquery.cookie-1.4.1.min.js"></script>
+    <script src="../plugins/up/easyUpload.js/easyUpload.js"></script>  <!-- 上传附件 -->
+    <!--<script src="../datas/data.js"></script>-->
+    <script src="../js/announcement.js"></script>
+</body>
+</html>

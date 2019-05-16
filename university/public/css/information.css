@@ -1,0 +1,247 @@
+
+.box{
+    width: 100%;
+    height: 656px;
+    margin: 0 auto;
+    background-color: #eef5f9;
+}
+.nav li a{
+    font-size: 13px;
+}
+.tabs{
+    margin-top: 20px;
+    margin-left: 40px;
+
+}
+.photo img{
+    width:100%;
+    min-width: 244px;
+    height:auto;
+    vertical-align: middle;
+
+}
+.photo{
+    margin-top: 20px; float: left;
+    width:20%;
+    min-width: 244px;
+    height: 240px;
+    position: relative;
+    margin-left: 10px;
+    border-radius:50%;
+    overflow: hidden;
+
+}
+.pro{
+    float: left;
+    margin-top: 20px;
+    margin-left: 30px;
+    width: 70%;
+    margin-bottom: 30px;
+}
+.pro ul li {
+    padding: 14px 0;
+    border-bottom: 1px solid #dfdfdf;
+    width: 100%;
+}
+.pro ul li span{
+    color: #7a7a7a;
+}
+.tab-pane{
+    position: relative;
+}
+.photo-box{
+    position: relative;
+    float: left;
+    height: 300px;
+}
+.photo-box .photo{
+    margin-top: 20px;
+    width:240px;
+    height: 240px;
+    position: relative;
+    margin-left: 10px;
+    border-radius:50%;
+    overflow: hidden;
+}
+.unload{
+    position: absolute;
+    box-sizing: border-box;
+    width: 60px;
+    height: 30px;
+    top: 280px;
+    left: 100px;
+    border-radius:6px;
+    text-align: center;
+    line-height: 20px;
+    background: #7b4397;
+    color: white;
+    font-size: 11px;
+    user-select: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 20;
+}
+
+.modify{
+    float: left;
+    margin-top: 20px;
+    margin-left: 30px;
+    width: 70%;
+    min-width: 400px;
+}
+.modify input{
+    width: 50%;
+    margin-left:1%;
+    vertical-align: middle;
+    display: inline-block;
+    outline: #2196f3 !important;
+
+}
+.form-control{
+    outline: #2196f3 !important;
+}
+input::-webkit-input-placeholder {
+    color: #b2bac5;
+}
+.pro ul li .val{
+    color: black;
+}
+
+form label{
+    font-size: 13px;
+    font-weight: lighter;
+    margin-left: 3px;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    width: 60px;
+
+}
+form{
+    margin-bottom: 30px;
+}
+form button{
+    outline: none;
+    border: none;
+    background:#2196f3;
+    color: white;
+    margin-top: 40px;
+    padding: 3px 10px 3px;
+    margin-left: 230px;
+    border-radius: 5px;
+}
+.reset{
+    margin-left: 20px;
+}
+
+button:hover{
+    box-shadow: 0 0  4px #2196f3;
+}
+
+.unload:hover{
+    box-shadow: 0 0  4px #7b4397;
+}
+.unload:active{
+    background:  #943baa;
+}
+.tab-pane form .file{
+    display: none;
+}
+.change-password{
+    width: 50%;
+    height: 100px;
+    margin: 0 auto;
+}
+#messages form input{
+    outline: none;
+}
+#messages input{
+    width: 50%;
+    outline: none;
+    display: inline-block;
+}
+
+#messages form{
+    margin-top: 20px;
+}
+#messages label{
+    display: inline-block;
+    width: 100px;
+}
+.warn,.warn-a{
+    font-size: 13px;
+    color: red;
+    margin-left: 15px;
+    display: none;
+}
+/*修改密码确认按钮*/
+.p-submit{
+    display: block;
+    outline: none;
+    border: none;
+    background:#2196f3;
+    color: white;
+    margin-top: 20px;
+    border-radius: 5px;
+
+}
+.p-submit:hover{
+    box-shadow: 0 0  4px #2196f3;
+}
+
+@media screen and (max-width:768px){
+   .change-password{
+       position: absolute;
+
+   }
+    .paw{
+        display: block;
+    }
+    .paw2{
+        display: block;
+    }
+    .photo{
+        float: none;
+    }
+
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+.pick{
+    width: 84%;
+    color: red;
+    text-align: center;
+    margin-top: 20px;
+    display: none;
+}
+.z1,.z2{
+    float: right;
+    margin-right: 30%;
+    font-size: 13px;
+    font-weight: lighter;
+    margin-top: 10px;
+    color: red;
+    display:none;
+}
+.f-b{
+    margin-top: 5px;
+}
+.aa{
+    vertical-align: middle;
+    font-size: 20px;
+    margin-right: 5px;
+
+}
+body .nav-tabs > li.active > a, body .nav-tabs > li.active > a:hover, body .nav-tabs > li.active > a:focus {
+    color: white;
+    cursor: default;
+    background-color:#2196f3;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;}
+body .nav-tabs > li > a{
+     color:#2196f3 ;
+ }
+

@@ -1,0 +1,227 @@
+body {
+    /*overflow-x: hidden;*/
+    height: 100%;
+ }
+ /*头部导航*/
+header{
+    background-color: black;
+    height: 65px;
+}
+.navbar{
+     border-radius: unset;
+     background-color: #212121;
+     height: 100%;
+     margin: 0;
+ }
+.navbar .container-fluid{
+    padding-left: 70px;
+    padding-right: 70px;
+    height: 100%;
+}
+.navbar-brand{
+    color: white;
+    height: 100%;
+    background-color: #f10000;
+    padding: 0;
+}
+.navbar-brand img{
+    width: 130px;
+    height: 63px;
+}
+.navbar-right>li>a{
+    display: inline-block;
+    line-height: 35px;
+    height: 65px;
+    color: #E3E3E3;
+ }
+.navbar-right li a{
+    padding: 15px 10px;
+}
+.navbar-right li:first-child a{
+    padding-right: 5px;
+}
+.navbar-right li:nth-child(5) a:hover{
+    color: white;
+    cursor: pointer;
+}
+.navbar-right li:nth-child(6) a:hover{
+    color: white;
+    cursor: pointer;
+}
+.navbar-right li a:hover{
+    background-color: transparent;
+    cursor: default;
+}
+ /*头像*/
+.container-fluid .fr{
+    width: 120px;
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.5s;
+}
+.navbar-header>.fr>span{
+    display: inline-block;
+    line-height: 35px;
+    padding: 15px 0;
+    color: #E3E3E3;
+}
+.navbar-header .fr .head-wrap{
+    position: relative;
+}
+.navbar-header .fr .head-wrap:hover .downlist{
+    visibility: visible;
+    opacity: 1;
+}
+.head-wrap{
+    display: inline-block;
+    vertical-align: bottom;
+    padding: 15px 0;
+    padding-right: 10px;
+    height: 65px;
+}
+.head{
+    display: inline-block;
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+    vertical-align: bottom;
+    /*background-image: url("../images/main/head.jpg");*/
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+.badge{
+    background-color: #7b4397;
+}
+ /*下拉菜单*/
+.downlist{
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top:100%;
+    left: -300%;
+    width: 200px;
+    background-color: white;
+    text-align: center;
+    z-index: 999;
+    box-shadow: 0 3px 10px -3px #a8a8a8;
+    transition: all .3s;
+}
+.downlist>ul>li{
+     color: black;
+     line-height: 50px;
+
+ }
+.downlist>ul>li>span{
+    color: #7b4397;
+}
+ /*.splitter {*/
+     /*width: 5px;*/
+     /*height: 100%;*/
+     /*bottom: 0;*/
+     /*left: 240px;*/
+     /*position: absolute;*/
+     /*overflow: hidden;*/
+     /*background-color: #fff;*/
+ /*}*/
+ .nav > li > a:focus{
+    height: 63px;
+     background-color: transparent;
+}
+
+
+
+
+ /*左侧菜单*/
+.pageSidebar{
+    width: 240px;
+    height: 100%;
+    min-height: 655px;
+    padding-bottom: 30px;
+    overflow: auto;
+    background-color: #e3e3e3;
+    transition: all 0.5s;
+}
+ .pageContent{
+     height: 100%;
+     /*min-width: 768px;*/
+     left: 120px;
+
+     top: 0;
+     right: 0;
+     z-index: 3;
+     position: absolute;
+     transition: all 0.5s;
+     overflow: hidden;
+ }
+ .pageContainer{
+     position: relative;
+     height: calc(100% - 65px);
+ }
+ .pageSidebar{
+     overflow: unset;
+     background-color: white;
+ }
+.pageContainer a{
+    color: black;
+    line-height: 40px;
+}
+.pageContainer a span{
+    display: inline-block;
+    width: 120px;
+    transition: all 0.3s;
+    opacity: 0;
+    visibility: hidden;
+}
+.pageContainer .pageSidebar{
+    width: 120px;
+}
+.nav.nav-stacked > li{
+    height: 60.8px;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 0;
+}
+.nav.nav-stacked > li>a{
+    border-radius: unset;
+}
+.nav.nav-stacked > li > .active{
+    background: linear-gradient(to left, #7b4397, #2196f3);
+    color: white;
+}
+.nav.nav-stacked > li > a:hover{
+    color: white;
+    background: linear-gradient(to left, #7b4397, #2196f3);
+}
+.navbar-collapse{
+    padding-left: 5px;
+    padding-right: 5px;
+ }
+ .nav>li{
+     text-align: center;
+ }
+/*媒体查询*/
+@media screen and (min-width: 768px) {
+    .container-fluid .fr{
+        display: none;
+    }
+}
+@media screen and (min-width: 992px) {
+    .pageContainer a span{
+        opacity: 1;
+        visibility: visible;
+    }
+    .pageContainer .pageSidebar{
+        width: 240px;
+    }
+    .pageContent{
+        left: 240px;
+    }
+}
+@media screen and (max-width: 992px) {
+    .pageContainer a:hover span{
+        width: 60px;
+        opacity: 1;
+        visibility: visible;
+    }
+}

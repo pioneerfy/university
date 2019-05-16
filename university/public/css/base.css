@@ -1,0 +1,65 @@
+html{color:#000;background:#FFF}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
+table{border-collapse:collapse;border-spacing:0}
+fieldset,img{border:0}
+address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;
+    font-weight:normal}
+ol,ul{list-style:none}
+caption,th{text-align:left}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}
+q:before,q:after{content:''}
+abbr,acronym{border:0;font-variant:normal}
+sup{vertical-align:text-top}
+sub{vertical-align:text-bottom}
+input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;*font-size:100%}
+legend{color:#000}
+a{text-decoration: none}
+
+/*全局样式*/
+html,body{
+    background-color: #eef5f9;
+    width: 100%;
+    height: 100%;
+    color: #444444;
+}
+/*清除浮动*/
+.clear::after{
+    display: block;
+    content: "";
+    clear: both;
+}
+.fl{
+    float: left;
+}
+.fr {
+    float: right;
+}
+/*主题颜色（用于表格头部颜色）*/
+.themeBgColor{
+    background: linear-gradient(to left, #7b4397, #2196f3);
+}
+/*按钮颜色*/
+.btnColor1{
+    background-color: #2196f3;
+}
+.btnColor2{
+    background-color: #7b4397;
+}
+/*子网页头部*/
+.header{
+    width: 100%;
+    height: 60px;
+    background: #ffffff;
+    box-shadow: 0 3px 10px -3px #a8a8a8;
+    line-height: 60px;
+    padding-left: 20px;
+}
+/*表格元素字体样式*/
+td{
+    font-size: 16px;
+    color: #666;
+}
+/*IE盒子模型*/
+*{
+    box-sizing: border-box;
+}

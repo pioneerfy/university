@@ -1,0 +1,256 @@
+<!doctype html>
+<html>
+<head>
+    <!--声明当前页面的编码集：中文编码（gbk/gb2313），国际编码（utf-8）-->
+    <meta http-equiv="Contet-Type" content="text/html;charset=utf-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML国际化标准模板</title>
+    <meta name="keywords" content="关键词，关键词，关键词">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="../libs/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../fonts/iconfont.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/role.css">
+    <style type="text/css">
+    </style>
+
+    <!--css/js-->
+
+
+</head>
+<body>
+    <header class="header">
+        <h1 class="header-h1"><span class="iconfont icon-shezhi"></span><span>权限管理</span></h1>
+    </header>
+    <div class="wrap">
+        <!--<div class="search">-->
+            <!--<label class="s-label" for="inputName">姓名</label><input class="form-control s_input" id="inputName" type="text" placeholder="请输入关键字">-->
+            <!--<label class="s-label" for="inputPost">状态</label><input class="form-control s_input" id="inputPost" type="text" placeholder="请输入关键字">-->
+            <!--<button id="search-btn"><span class="iconfont icon-chazhao"></span>查找</button> <button id="searchAll-btn">显示所有</button><span id="searchResult">没有找到符合条件的员工信息</span>-->
+        <!--</div>-->
+
+        <div class="table">
+
+        </div>
+        <!--<div class="add">-->
+            <!--<button id="btn-add-staff"><span class="iconfont icon-xinzeng"></span> 新增职工</button>-->
+        <!--</div>-->
+        <nav id='callBackPager'>
+        </nav>
+    </div>
+    <!--编辑模态框-->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                    <h4 class="modal-title" id="updateModalLabel">更改权限</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="revise">
+                        <div class="revise-role">
+                            <p>将<span id="name" style="color: red"></span>权限更改为</p>
+                            <form action="">
+                                <div class="label1">
+                                    <div class="box" id="1">
+                                        <input id="item1" type="radio" name="item" value="1" >
+                                        <label for="item1"></label>
+                                        <span>管理员</span>
+                                    </div>
+                                    <div class="box" id="2">
+
+                                        <input id="item2" type="radio" name="item" value="2">
+                                        <label for="item2"></label>
+                                        <span >老师</span>
+                                    </div>
+                                    <div class="box" id="3">
+                                        <input id="item3" type="radio" name="item" value="3">
+                                        <label for="item3"></label>
+                                        <span >校长</span>
+                                    </div>
+                                    <div class="pick" >请选择需要更改的权限!</div>
+                                </div>
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btn-save">保存修改</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../libs/jQuery/jquery-1.11.1.js"></script>
+    <script src="../libs/bootstrap/js/bootstrap.js"></script>
+    <script src="../plugins/pagination/extendPagination.js"></script>
+    <script>
+
+        var currPage = 1;
+        var totalCount,
+            dataList=[];
+
+        window.onload = function() {
+                load();
+            };
+        //动态渲染方法
+        function load() {
+            // $('#searchResult').hide();
+            var limit = 4;
+            data(currPage, limit);
+            // createTable(1, limit, totalCount);
+            $('#callBackPager').extendPagination({
+                totalCount: totalCount,
+                limit: limit,
+                callback: function(curr, limit) {
+                    data(curr, limit);
+                }
+            });
+        }
+
+        //获取数据内部对象
+        function data(curr,limit) {
+            totalCount=parent.usersArr.data.total;
+            dataList=parent.usersArr.data.records;
+            createTable(curr,limit,totalCount)
+        }
+        //创建表格
+        function createTable(currPage, limit, total) {
+            var html=[], showNum=limit;
+            // var length=parent.location.search.split("=")[1].split("&").length;
+            // var pas=parent.location.search.split("=")[1].split("&")[length-2];
+            html.push('<table class="table table-striped ">');
+            html.push('<thead><tr><th>姓名</th><th>用户名</th><th>密码</th><th>权限</th><th>电话</th><th>邮箱</th><th>操作</th></thead><tbody>');
+            if(total - (currPage * limit) < 0) {
+                showNum = total - ((currPage - 1) * limit);
+            }
+
+
+            for(var i = 0; i < showNum; i++) {
+                html.push('<tr data-index='+(i+((currPage-1) * limit))+'>');
+                html.push('<td>' + dataList[i+((currPage-1) * limit)].name + '</td>');
+                html.push('<td>' + dataList[i+((currPage-1) * limit)].username + '</td>');
+                html.push('<td>' +dataList[i+((currPage-1) * limit)].password+ '</td>');
+                html.push('<td>' + dataList[i+((currPage-1) * limit)].job + '</td>');
+                html.push('<td>' + dataList[i+((currPage-1) * limit)].tel + '</td>');
+                html.push('<td>' + dataList[i+((currPage-1) * limit)].email + '</td>');
+                html.push('<td><button class="edit"><span class="iconfont icon-shezhi"></span>更改权限</button>');
+                html.push('</tr>');
+            }
+
+            html.push('</tbody></table>');
+
+            var $table=$('.table');
+            $table.empty();
+            $table.html(html.join(''));
+            console.log($($(".pas")[0]).text());
+
+            // 编辑按钮事件
+            $('.edit').click(function () {
+                $('#updateModal').modal();
+                var name=$(this).parents('tr').find('td:nth-child(2)').text();
+                var job;
+                $("#name").text(name);
+                for(var i=0;i<parent.usersArr.data.records.length;i++){
+                    if(parent.usersArr.data.records[i].username==name){
+                        job=parent.usersArr.data.records[i].role;
+                        if(job==1){
+                            $("#1").hide().siblings().show()
+                        }
+                        if(job==2){
+                            $("#2").hide().siblings().show()
+                        }
+                        if(job==3){
+                            $("#3").hide().siblings().show()
+                        }
+                    }
+                }
+                $('#updateModal').find('#btn-save').off('click').click(function () {
+
+                    data(currPage, limit,'','','');
+                });
+                $("#btn-save").click(function () {
+                    // var length=parent.location.search.split("=")[1].split("&").length;
+                    // // var role=parent.location.search.split("=")[1].split("&")[length-1];
+                    var val=$('input:radio[name="item"]:checked').val();
+
+                    console.log(val);
+                    if(val!=null){
+                        for (var i=0;i<parent.usersArr.data.records.length;i++){
+                            if(parent.usersArr.data.records[i].username==name){
+                                parent.usersArr.data.records[i].role=val;
+                                if(val==1){
+                                    parent.usersArr.data.records[i].job="管理员"
+                                }
+                                if(val==2){
+                                    parent.usersArr.data.records[i].job="老师"
+                                }
+                                if(val==3){
+                                    parent.usersArr.data.records[i].job="校长"
+                                }
+
+                                // $('#updateModal').modal("hide");
+                                $('input:radio[name="item"]').removeAttr("checked");
+                                load();
+
+                                function a() {
+                                    parent.location.href = '../login.html?'
+                                }
+                                parent.localStorage.setItem('departData', JSON.stringify(parent.departData));
+                                parent.localStorage.setItem('staffData', JSON.stringify(parent.staffArr.data.records));
+                                parent.localStorage.setItem('staffTotal', parent.staffArr.data.total);
+                                parent.localStorage.setItem('userData', JSON.stringify(parent.usersArr.data.records));
+                                parent.localStorage.setItem('studentData', JSON.stringify(parent.studentData));
+                                parent.localStorage.setItem('classData', JSON.stringify(parent.classData));
+                                $(".pick").text("修改成功，即将跳转..").css("color","red").slideDown();
+                                setTimeout(a,3000);
+                                // if(parent.$(".username").text()==name){
+                                //
+                                //     var userLevel;
+                                //     var $pageSiderNav;
+                                //     if(val=='1'){
+                                //         userLevel='管理员';
+                                //         parent.$('.userLevel').text(userLevel);
+                                //
+                                //         // $('.head').css('background-image','url('+usersArr.data.records[role-1].img+')');
+                                //         $pageSiderNav=$('<ul class="nav nav-stacked nav-pills">\n                <li role="presentation">\n                    <a class="active" href="homepage.html" target="mainFrame"><i class="iconfont icon-shouye-copy-copy-copy"></i><span>首页</span></a>\n                </li>\n                <li role="presentation">\n                    <a href="department.html" target="mainFrame"><i class="iconfont icon-guanli"></i><span>部门管理</span></a>\n                </li>\n                <li role="presentation">\n                    <a href="staff.html" target="mainFrame"><i class="iconfont icon-zhigongguanli"></i><span>职工管理</span></a>\n                </li>\n                <li role="presentation">\n                    <a href="class.html" target="mainFrame"><i class="iconfont icon-biaoge"></i><span>班级管理</span></a>\n                </li>\n                <li role="presentation">\n                    <a href="student.html" target="mainFrame"><i class="iconfont icon-huiyuan"></i><span>学生管理</span></a>\n                </li>\n                <li role="presentation">\n                    <a href="charts.html" target="mainFrame"><i class="iconfont icon-shuju"></i><span>数据管理</span></a>\n                </li>\n                <li role="presentation">\n                    <a href="photowall.html" target="mainFrame"><i class="iconfont icon-zhaopian_xianxing"></i><span>照片墙</span></a>\n                </li>\n                <li role="presentation">\n                    <a href="attendence.html" target="mainFrame"><i class="iconfont icon-shijian"></i><span>考勤管理</span></a>\n                </li>\n                <li role="presentation">\n                    <a href="announcement.html" target="mainFrame"><i class="iconfont icon-notice"></i><span>公告管理</span></a>\n                </li>\n                <li role="presentation">\n                    <a href="role.html" target="mainFrame"><i class="iconfont icon-shezhi"></i><span>权限管理</span></a>\n                </li>\n            </ul>');
+                                //         parent.$('.pageSidebar').append($pageSiderNav);
+                                //     }
+                                //     if(val=='2'){
+                                //         userLevel='老师';
+                                //         parent.$('.userLevel').text(userLevel);
+                                //
+                                //         // $('.head').css('background-image','url('+usersArr.data.records[role-1].img+')');
+                                //         $pageSiderNav=$('<ul class="nav nav-stacked nav-pills">\n                <li role="presentation">\n                    <a class="active" href="homepage.html" target="mainFrame"><i class="iconfont icon-shouye-copy-copy-copy"></i><span>首页</span></a>\n                </li>\n                <li role="presentation">\n                    <a href="class.html" target="mainFrame"><i class="iconfont icon-biaoge"></i><span>班级管理</span></a>\n                </li>\n                <li role="presentation">\n                    <a href="student.html" target="mainFrame"><i class="iconfont icon-huiyuan"></i><span>学生管理</span></a>\n                </li>\n                <li role="presentation">\n                    <a href="photowall.html" target="mainFrame"><i class="iconfont icon-zhaopian_xianxing"></i><span>照片墙</span></a>\n                </li>\n                <li role="presentation">\n                    <a href="attendence.html" target="mainFrame"><i class="iconfont icon-shijian"></i><span>考勤管理</span></a>\n                </li>\n                <li role="presentation">\n                    <a href="announcement.html" target="mainFrame"><i class="iconfont icon-notice"></i><span>公告管理</span></a>\n                </li>\n            </ul>');
+                                //         parent.$('.pageSidebar').append($pageSiderNav);
+                                //
+                                //     }
+                                //     if(val=='3'){
+                                //         userLevel='校长';
+                                //         parent.$('.userLevel').text(userLevel);
+                                //
+                                //         // $('.head').css('background-image','url('+usersArr.data.records[role-1].img+')');
+                                //         $pageSiderNav=$('<ul class="nav nav-stacked nav-pills">\n                <li role="presentation">\n                    <a class="active" href="homepage.html" target="mainFrame"><i class="iconfont icon-shouye-copy-copy-copy"></i><span>首页</span></a>\n                </li>\n                <li role="presentation">\n                    <a href="announcement.html" target="mainFrame"><i class="iconfont icon-notice"></i><span>公告管理</span></a>\n                </li>\n            </ul>');
+                                //         parent.$('.pageSidebar').append($pageSiderNav);
+                                //     }
+                                // }
+
+                            }
+                        }
+                    }else{
+                        $(".pick").text("请选择需要更改的权限!").css("color","red");
+                        }
+                    })
+                })
+
+
+        }
+
+    </script>
+</body>
+</html>

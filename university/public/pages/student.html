@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生管理</title>
+    <link rel="stylesheet" href="../libs/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../fonts/iconfont.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/student.css">
+</head>
+<body>
+    <header class="header">
+        <h1 class="header-h1"><span class="iconfont icon-huiyuan"></span><span>学生管理</span></h1>
+    </header>
+
+<div class="wrap">
+    <div class="search">
+        <label class="s-label not" for="selectInstructor">辅导员</label><input class="form-control s_input" id="selectInstructor" type="text" placeholder="请输入关键字">
+        <label class="s-label not" for="selectName">学生姓名</label><input class="form-control s_input" id="selectName" type="text" placeholder="请输入关键字">
+        <button id="search-btn"><span class="iconfont icon-chazhao"></span>查找</button> <button id="searchAll-btn">显示所有</button><span id="searchResult">没有找到符合条件的员工信息</span>
+    </div>
+    <div class="table">
+
+    </div>
+    <div class="addDiv clear">
+        <div class="left">
+            <input type="checkbox" id="all" style="margin-left: 10px;">
+            <label class="not" for="all" style="color:#666666;padding-left: 10px;padding-right: 20px;">全&nbsp;选</label>
+            <button class="allDel btn-danger ">删除</button>
+        </div>
+        <div class="right">
+            <button class="add"><span class="iconfont icon-xinzeng" style="margin-right: 2px;"></span>新增学生</button>
+        </div>
+    </div>
+    <nav id='callBackPager'></nav>
+
+    <!-- 修改 -->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">编辑学生信息</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <!-- 学号 -->
+                        <div class="body-line clear">
+                            <label for="studentId">学号</label>
+                            <input class="value form-control" id="studentId" placeholder="请输入学号" type="number" readonly>
+                        </div>
+                        <!-- 学生姓名 -->
+                        <div class="body-line clear">
+                            <label for="name">学生姓名</label>
+                            <input class="value form-control" id="name" placeholder="请输入学生姓名" type="text">
+                            <span  class="pop"  data-toggle="popover" data-content="长度不能大于10字符"><span class="iconfont icon-gou"></span>
+</span>
+                        </div>
+                        <!-- 性别 -->
+                        <div class="body-line clear">
+                            <label>性别</label>
+                            <div class="sex">
+                                <input id="item5" type="radio" name="editSex" value="男">
+                                <label for="item5" class="radioLabel not"></label>
+                                <span style="margin-left: 30px;">男</span>
+                            </div>
+                            <div class="sex">
+                                <input id="item6" type="radio" name="editSex" value="女">
+                                <label for="item6" class="radioLabel not"></label>
+                                <span style="margin-left: 30px;">女</span>
+                            </div>
+                        </div>
+                        <!-- 年龄 -->
+                        <!--<div class="body-line clear">
+                            <label for="editAge">年龄</label>
+                            <input class="value form-control" id="editAge" type="number">
+                        </div>-->
+                        <!-- 出生日期 -->
+                        <div class="body-line clear">
+                            <label for="editBirthDate">出生年月</label>
+                            <input class="value form-control" id="editBirthDate" type="text">
+                            <span  class="pop"  data-toggle="popover" data-content="长度不能大于20字符"><span class="iconfont icon-gou"></span>
+</span>
+                        </div>
+                        <!-- 班级名称 -->
+                        <div class="body-line clear">
+                            <label for="proSelect">班级名称</label>
+                            <div class="class">
+                                <select id="proSelect">
+                                </select>
+                            </div>
+                        </div>
+                        <!-- 辅导员 -->
+                        <div class="body-line clear">
+                            <label for="proSelect">辅导员</label>
+                            <input class="value form-control" id="instructorSelect" type="text" readonly>
+                        </div>
+                        <!-- 家长电话 -->
+                        <div class="body-line clear">
+                            <label for="tel">家长电话</label>
+                            <input class="value form-control" id="tel" placeholder="请输入家长电话" type="text">
+                            <span  class="pop"  data-toggle="popover" data-content="手机号码格式不正确"><span class="iconfont icon-gou"></span>
+</span>
+                        </div>
+                        <!-- 家庭地址 -->
+                        <div class="body-line clear">
+                            <label for="address">家庭地址</label>
+                            <input class="value form-control" id="address" placeholder="请输入家庭地址" type="text">
+                            <span  class="pop"  data-toggle="popover" data-content="长度不能小于2字符"><span class="iconfont icon-gou"></span>
+</span>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btn-save">保存</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 删除 -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="deleteModalLabel">删除学生</h4>
+                </div>
+                <div class="modal-body">
+                    确定要删除该学生吗？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btn-del">确认删除</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 删除警告 -->
+    <div class="modal fade" id="delAlertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="delAlertModalLabel">删除警告</h4>
+                    </div>
+                    <div class="modal-body">
+                        未选中一条数据！！
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- 退学 -->
+    <div class="modal fade" id="endModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="endModalLabel">退学</h4>
+                </div>
+                <div class="modal-body">
+                    确定要退学吗？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btn-end">确认退学</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 退学警告 -->
+    <div class="modal fade" id="endAlertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="endAlertModalLabel">退学警告</h4>
+                </div>
+                <div class="modal-body">
+                    未选中一条数据！！
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 已退学警告 -->
+    <div class="modal fade" id="hasEndAlertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="hasEndAlertModalLabel">已退学警告</h4>
+                </div>
+                <div class="modal-body">
+                    该学生已退学！！
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 新增 -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="addModalLabel">新增学生信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <!-- 学号 -->
+                        <div class="body-line clear">
+                            <label for="addId">学号</label>
+                            <input class="value form-control" id="addId" placeholder="请输入学号" type="number" readonly>
+                        </div>
+                        <!-- 学生姓名 -->
+                        <div class="body-line clear">
+                            <label for="addName">学生姓名</label>
+                            <input class="value form-control" id="addName" placeholder="请输入学生姓名" type="text">
+                            <span  class="pop"  data-toggle="popover" data-content="长度不能大于10字符"><span class="iconfont icon-gou"></span>
+</span>
+                        </div>
+                        <!-- 性别 -->
+                        <div class="body-line clear">
+                            <label>性别</label>
+                                 <div class="sex">
+                                     <input id="item1" type="radio" name="sex" value="男" checked>
+                                     <label for="item1" class="radioLabel not"></label>
+                                     <span style="margin-left: 30px;">男</span>
+                                 </div>
+                                 <div class="sex">
+                                     <input id="item2" type="radio" name="sex" value="女">
+                                     <label for="item2" class="radioLabel not"></label>
+                                     <span style="margin-left: 30px;">女</span>
+                                 </div>
+
+                         </div>
+                         <!-- 出生日期 -->
+                        <div class="body-line clear">
+                            <label for="birthDate">出生年月</label>
+                            <input class="value form-control" id="birthDate" placeholder="请输入出生年月" type="text">
+                            <span  class="pop"  data-toggle="popover" data-content="长度不能大于20字符"><span class="iconfont icon-gou"></span>
+</span>
+                        </div>
+                        <!-- 年龄 -->
+                        <!--<div class="body-line clear">
+                            <label for="age">年龄</label>
+                            <input class="value form-control" id="age" placeholder="请输入年龄" type="number" readonly>
+                        </div>-->
+                        <!-- 班级名称 -->
+                        <div class="body-line clear">
+                            <label for="proSelect">班级名称</label>
+                            <div class="class">
+                                <select id="addProSelect">
+                                </select>
+                            </div>
+                        </div>
+                        <!-- 辅导员 -->
+                        <div class="body-line clear">
+                            <label for="proSelect">辅导员</label>
+                            <div class="class">
+                                <select id="addInstructorSelect" disabled>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- 年级 -->
+                        <div class="body-line clear">
+                            <label for="addRank">年级</label>
+                            <div class="class">
+                                <select id="addRank">
+                                    <option value="大一">大一</option>
+                                    <option value="大二">大二</option>
+                                    <option value="大三">大三</option>
+                                    <option value="大四">大四</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- 家长电话 -->
+                        <div class="body-line clear">
+                            <label for="addTel">家长电话</label>
+                            <input class="value form-control" id="addTel" placeholder="请输入家长电话" type="text">
+                            <span  class="pop"  data-toggle="popover" data-content="手机号码格式不正确"><span class="iconfont icon-gou"></span>
+</span>
+                        </div>
+                        <!-- 家庭地址 -->
+                        <div class="body-line clear">
+                            <label for="addAddress">家庭地址</label>
+                            <input class="value form-control" id="addAddress" placeholder="请输入家庭地址" type="text">
+                            <span  class="pop"  data-toggle="popover" data-content="长度不能小于2字符"><span class="iconfont icon-gou"></span>
+</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btn-add" disabled >保存</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- 详情 -->
+    <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="detailModalLabel">查看学生信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="">
+                            <!-- 学号 -->
+                            <div class="body-line clear">
+                                <label for="detailId">学号</label>
+                                <input class="value form-control" id="detailId" type="number" readonly>
+                            </div>
+                            <!-- 学生姓名 -->
+                            <div class="body-line clear">
+                                <label for="detailStudentName">学生姓名</label>
+                                <input class="value form-control" id="detailStudentName" type="text" readonly>
+                            </div>
+                            <!-- 性别 -->
+                            <div class="body-line clear">
+                                <label>性别</label>
+                                <div class="sex">
+                                    <input id="item3" type="radio" name="detailSex" value="男" disabled>
+                                    <label for="item3" class="radioLabel not"></label>
+                                    <span style="margin-left: 30px;">男</span>
+                                </div>
+                                <div class="sex">
+                                    <input id="item4" type="radio" name="detailSex" value="女" disabled>
+                                    <label for="item4" class="radioLabel not"></label>
+                                    <span style="margin-left: 30px;">女</span>
+                                </div>
+
+                            </div>
+                            <!-- 年龄 -->
+                            <div class="body-line clear">
+                                <label for="detailAge">年龄</label>
+                                <input class="value form-control" id="detailAge" type="number" readonly>
+                            </div>
+                            <!-- 出生日期 -->
+                            <div class="body-line clear">
+                                <label for="detailBirthDate">出生年月</label>
+                                <input class="value form-control" id="detailBirthDate" type="text" readonly>
+                            </div>
+                            <!-- 班级名称 -->
+                            <div class="body-line clear">
+                                <label for="detailProSelect">班级名称</label>
+                                <input class="value form-control" id="detailProSelect" type="text" readonly>
+                            </div>
+                            <!-- 辅导员 -->
+                            <div class="body-line clear">
+                                <label for="detailInstructorSelect">辅导员</label>
+                                <input class="value form-control" id="detailInstructorSelect" type="text" readonly>
+                            </div>
+                            <!-- 家长电话 -->
+                            <div class="body-line clear">
+                                <label for="detailTel">家长电话</label>
+                                <input class="value form-control" id="detailTel" type="text" readonly>
+                            </div>
+                            <!-- 家庭地址 -->
+                            <div class="body-line clear">
+                                <label for="detailAddress">家庭地址</label>
+                                <input class="value form-control" id="detailAddress" type="text" readonly>
+                            </div>
+                            <!-- 年级 -->
+                            <div class="body-line clear">
+                                <label for="detailRank">年级</label>
+                                <input class="value form-control" id="detailRank" type="text" readonly>
+                            </div>
+                            <!-- 状态 -->
+                            <!--<div class="body-line clear">
+                                <label for="detailStatus">状态</label>
+                                <input class="value form-control" id="detailStatus" type="text" readonly>
+                            </div>-->
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 全选 -->
+</div>
+    <script src="../libs/jQuery/jquery-1.11.1.js"></script>
+    <script src="../libs/bootstrap/js/bootstrap.js"></script>
+    <script src="../plugins/pagination/extendPagination.js"></script>
+    <script src="../js/student.js"></script>
+</body>
+</html>

@@ -1,0 +1,690 @@
+<!doctype html>
+<html>
+<head>
+    <!--声明当前页面的编码集：中文编码（gbk/gb2313），国际编码（utf-8）-->
+    <meta http-equiv="Contet-Type" content="text/html;charset=utf-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML国际化标准模板</title>
+    <meta name="keywords" content="关键词，关键词，关键词">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="../libs/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../fonts/iconfont.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/staff.css">
+    <style type="text/css">
+    </style>
+
+    <!--css/js-->
+
+
+</head>
+<body>
+    <header class="header">
+        <h1 class="header-h1"><span class="iconfont icon-zhigongguanli"></span><span>职工管理</span></h1>
+    </header>
+    <div class="wrap">
+        <!--姓名：<input type="text" name="" id="inputName" value="" placeholder="请输入查询关键字"/>-->
+        <!--职务：<input type="text" name="" id="inputPost" value="" placeholder="请输入查询关键字"/>-->
+        <!--<button id="search-btn">查找</button><button id="searchAll-btn">显示所有员工</button><span id="searchResult">没有找到符合条件的员工信息</span>-->
+        <div class="search">
+            <label class="s-label" for="inputName">姓名</label><input class="form-control s_input" id="inputName" type="text" placeholder="请输入关键字">
+            <label class="s-label" for="inputPost">职称</label><input class="form-control s_input" id="inputPost" type="text" placeholder="请输入关键字">
+            <button id="search-btn"><span class="iconfont icon-chazhao"></span>查找</button> <button id="searchAll-btn">显示所有</button><span id="searchResult">没有找到符合条件的员工信息</span>
+        </div>
+
+        <div class="table">
+
+        </div>
+        <div class="add">
+            <button id="btn-add-staff"><span class="iconfont icon-xinzeng"></span> 新增职工</button>
+        </div>
+        <nav id='callBackPager'>
+        </nav>
+    </div>
+    <!--编辑模态框-->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="updateModalLabel">编辑职工信息</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="staff-name" class="control-label">姓名</label>
+                            <input type="text" class="form-control" id="staff-name">
+                            <span  class="pop"  data-toggle="popover" data-content="长度不能大于10字符"><span class="iconfont icon-gou"></span></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="staff-tel" class="control-label">手机</label>
+                            <input class="form-control" id="staff-tel">
+                            <span  class="pop"  data-toggle="popover" data-content="手机号码格式不正确"><span class="iconfont icon-gou"></span></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="staff-post" class="control-label">职称</label>
+                            <div class="down-list">
+                                <select id="staff-post">
+                                    <option value="">高级教师</option>
+                                    <option value="">中级教师</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="staff-depart" class="control-label">部门</label>
+                            <div class="down-list">
+                                <select id="staff-depart">
+                                    <option value="">学生会</option>
+                                    <option value="">教务处</option>
+                                    <option value="">保卫处</option>
+                                    <option value="">财务处</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="staff-email" class="control-label">邮箱</label>
+                            <input class="form-control" id="staff-email">
+                            <span  class="pop"  data-toggle="popover" data-content="长度不能大于20字符"><span class="iconfont icon-gou"></span></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="staff-birth" class="control-label">生日</label>
+                            <input class="form-control" id="staff-birth">
+                            <span  class="pop"  data-toggle="popover" data-content="长度不能大于20字符"><span class="iconfont icon-gou"></span></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">性别</label>
+                            <!--<div class="radios" id="staff-sex">-->
+                                <!--<input type="radio" id="staff-sex-male" name="staff-sex"><label for="staff-sex-male" class="control-label">男</label>-->
+                                <!--<input type="radio" id="staff-sex-female" name="staff-sex"><label for="staff-sex-female" class="control-label">女</label>-->
+                            <!--</div>-->
+                            <div class="radios" id="staff-sex">
+                                <div>
+                                    <input id="staff-sex-male" type="radio" name="staff-sex" value="男">
+                                    <label for="staff-sex-male"></label>
+                                    <span style="margin-left: 10px">男</span>
+                                </div>
+                                <div>
+                                    <input id="staff-sex-female" type="radio" name="staff-sex" value="女">
+                                    <label for="staff-sex-female"></label>
+                                    <span style="margin-left: 10px">女</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btn-save">保存修改</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--新增模态框-->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addModalLabel">新增职工信息</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="add-staff-name" class="control-label">姓名</label>
+                            <input type="text" class="form-control" id="add-staff-name">
+                            <span  class="pop"  data-toggle="popover" data-content="长度不能大于10字符"><span class="iconfont icon-gou"></span></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="add-staff-tel" class="control-label">手机</label>
+                            <input class="form-control" id="add-staff-tel">
+                            <span  class="pop"  data-toggle="popover" data-content="手机号码格式不正确"><span class="iconfont icon-gou"></span></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="staff-post" class="control-label">职称</label>
+                            <div class="down-list">
+                                <select id="add-staff-post">
+                                    <option value="" selected="selected">高级教师</option>
+                                    <option value="">中级教师</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add-staff-depart" class="control-label">部门</label>
+                            <div class="down-list">
+                                <select id="add-staff-depart">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add-staff-email" class="control-label">邮箱</label>
+                            <input class="form-control" id="add-staff-email">
+                            <span  class="pop"  data-toggle="popover" data-content="长度不能大于20字符"><span class="iconfont icon-gou"></span></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="add-staff-birth" class="control-label">生日</label>
+                            <input class="form-control" id="add-staff-birth">
+                            <span  class="pop"  data-toggle="popover" data-content="长度不能大于20字符"><span class="iconfont icon-gou"></span></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">性别</label>
+                            <!--<div class="radios" id="add-staff-sex">-->
+                                <!--<input type="radio" id="add-staff-sex-male" name="add-staff-sex" checked="checked"><label for="staff-sex-male" class="control-label">男</label>-->
+                                <!--<input type="radio" id="add-staff-sex-female" name="add-staff-sex"><label for="staff-sex-female" class="control-label">女</label>-->
+                            <!--</div>-->
+                            <div class="radios" id="add-staff-sex">
+                                <div>
+                                    <input id="add-staff-sex-male" type="radio" name="add-staff-sex" value="男" checked>
+                                    <label for="add-staff-sex-male"></label>
+                                    <span style="margin-left: 10px">男</span>
+                                </div>
+                                <div>
+                                    <input id="add-staff-sex-female" type="radio" name="add-staff-sex" value="女">
+                                    <label for="add-staff-sex-female"></label>
+                                    <span style="margin-left: 10px">女</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btn-add" disabled="disabled">确认新增</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--删除模态框-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="deleteModalLabel">删除部门</h4>
+                </div>
+                <div class="modal-body">
+                    确定要删除该职工吗？(只有该职工没有相关班级的时候才能删除该职工)
+                </div>
+                <div class="modal-footer">
+                    <button disabled='true' type="button" class="btn btn-primary" id="btn-del">确认删除</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../libs/jQuery/jquery-1.11.1.js"></script>
+    <script src="../libs/bootstrap/js/bootstrap.js"></script>
+    <script src="../plugins/pagination/extendPagination.js"></script>
+    <script>
+        var currPage = 1;
+        var totalCount,
+            dataList=[];
+
+        window.onload = function() {
+            //动态加载部门选项
+            var departListHtml=[];
+            for(var z=0;z<parent.departData.length;z++){
+                departListHtml.push('<option value="">'+parent.departData[z].name+'</option>');
+            }
+            $('#add-staff-depart').html(departListHtml.join(''));
+            $('#staff-depart').html(departListHtml.join(''));
+            $('#add-staff-depart').find('option:first-child').prop('selected',true);
+            $('#staff-depart').find('option:first-child').prop('selected',true);
+            //初始化弹出框
+            $(function () {
+                $('[data-toggle="popover"]').popover()
+            });
+            //判断是从部门页面加载进来还是导航加载进来
+            if(location.search!=''){
+                var departID=location.search.split('=')[1];
+                var depart;
+                for(var i=0;i<parent.departData.length;i++){
+                    if(parent.departData[i].id==departID){
+                        depart=parent.departData[i].name;
+                    }
+                }
+                load(depart,'','');
+            }else {
+                load('','','');
+            }
+            //模态框关闭事件
+            $('[data-dismiss]').on('click',function () {
+                nameIsOver=false;
+                telIsOver=false;
+                emailIsOver=false;
+                birthIsOver=false;
+                $('.popover').parent().find('.pop').trigger('click');
+            });
+            // 新增按钮事件
+            $('#btn-add-staff').click(function () {
+                $('#addModal').modal();
+                var leng=parent.staffArr.data.records.length;
+                $('#addModal .popover').css('display','none');
+                $('#addModal').find('#add-staff-name').val('');
+                $('#addModal').find('#add-staff-tel').val('');
+                $('#addModal').find('#add-staff-email').val('');
+                $('#addModal').find('#add-staff-birth').val('');
+                $('#addModal').find('.pop').css('visibility','hidden');
+                nameIsOver_add=false;
+                telIsOver_add=false;
+                emailIsOver_add=false;
+                birthIsOver_add=false;
+                $('#addModal').find('#btn-add').off('click').click(function () {
+                    parent.staffArr.data.records.push({
+                        'id':parent.staffArr.data.records[leng-1].id+1,
+                        'name':$('#addModal').find('#add-staff-name').val(),
+                        'tel':$('#addModal').find('#add-staff-tel').val(),
+                        'post':$('#addModal').find('#add-staff-post').find('option:selected').text(),
+                        'depart':$('#addModal').find('#add-staff-depart').find('option:selected').text(),
+                        'email':$('#addModal').find('#add-staff-email').val(),
+                        'birth':$('#addModal').find('#add-staff-birth').val(),
+                        'sex':$('#addModal').find('#add-staff-sex').find('input:checked+label+span').text()
+                    });
+                    $("#addModal").modal('hide');
+                    parent.staffArr.data.total+=1;
+                    for(var i=0;i<parent.departData.length;i++){
+                        if($('#addModal').find('#add-staff-depart').find('option:selected').text()==parent.departData[i].name){
+                            parent.departData[i].num++;
+                        }
+                    }
+                    console.log(parent.staffArr.data.records);
+                    load('','','');
+                });
+            });
+            // 判断模态框的格式是否正确
+            var nameIsOver=false;
+            $('#staff-name').on('input',function () {
+                if($(this).val().length>10){
+                    if(!nameIsOver) {
+                        $(this).parent().find('.popover-content').text('长度不能大于10字符');
+                        $(this).parent().find('.pop').trigger('click');
+                        $(this).parent().find('.pop').css('visibility','hidden');
+                        nameIsOver=true;
+                    }
+                }else if($(this).val().length<=10&&$(this).val().length>0){
+                    $(this).parent().find('.pop').css('visibility','visible');
+                    if(nameIsOver) {
+                        $(this).parent().find('.pop').trigger('click');
+                        nameIsOver=false;
+                    }
+                }else {
+                    if(nameIsOver==true) {
+                        $(this).parent().find('.popover-content').text('职工名称不能为空');
+                        $(this).parent().find('.pop').css('visibility','hidden');
+                    }else {
+                        $(this).parent().find('.pop').trigger('click');
+                        $(this).parent().find('.pop').css('visibility','hidden');
+                        $(this).parent().find('.popover-content').text('职工名称不能为空');
+                        nameIsOver=true;
+                    }
+                }
+                $('#btn-save').attr('disabled',nameIsOver||telIsOver||emailIsOver||birthIsOver);
+            });
+            var telIsOver=false;
+            $('#staff-tel').on('input',function () {
+                if(!$(this).val().match(/^1[34578]\d{9}$/)){
+                    if(!telIsOver) {
+                        $(this).parent().find('.pop').trigger('click');
+                        $(this).parent().find('.pop').css('visibility', 'hidden');
+                        telIsOver=true;
+                    }
+                    if($(this).val().length==0){
+                        $(this).parent().find('.popover-content').text('手机号码不能为空');
+                    }else {
+                        $(this).parent().find('.popover-content').text('手机号码格式为11位字符');
+                    }
+                }else{
+                    $(this).parent().find('.pop').css('visibility','visible');
+                    if(telIsOver) {
+                        $(this).parent().find('.pop').trigger('click');
+                        telIsOver=false;
+                    }
+                }
+                $('#btn-save').attr('disabled',nameIsOver||telIsOver||emailIsOver||birthIsOver);
+            });
+            var emailIsOver=false;
+            $('#staff-email').on('input',function () {
+                if(!$(this).val().match(/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/)){
+                    if(!emailIsOver) {
+                        $(this).parent().find('.pop').trigger('click');
+                        $(this).parent().find('.pop').css('visibility', 'hidden');
+                        emailIsOver=true;
+                    }
+                    if($(this).val().length==0){
+                        $(this).parent().find('.popover-content').text('邮箱不能为空');
+                    }else {
+                        $(this).parent().find('.popover-content').text('邮箱格式为xxx@xx.xxx');
+                    }
+                }else{
+                    $(this).parent().find('.pop').css('visibility','visible');
+                    if(emailIsOver) {
+                        $(this).parent().find('.pop').trigger('click');
+                        emailIsOver=false;
+                    }
+                }
+                $('#btn-save').attr('disabled',nameIsOver||telIsOver||emailIsOver||birthIsOver);
+            });
+            var birthIsOver=false;
+            $('#staff-birth').on('input',function () {
+                if(!$(this).val().match(/^[12]\d{3}[-](0[123456789]|1[012])[-](0[1-9]|[12][0-9]|3[01])$/)){
+                    if(!birthIsOver) {
+                        $(this).parent().find('.pop').trigger('click');
+                        $(this).parent().find('.pop').css('visibility', 'hidden');
+                        birthIsOver=true;
+                    }
+                    if($(this).val().length==0){
+                        $(this).parent().find('.popover-content').text('生日不能为空');
+                    }else {
+                        $(this).parent().find('.popover-content').text('日期格式为1996-08-09');
+                    }
+                }else{
+                    $(this).parent().find('.pop').css('visibility','visible');
+                    if(birthIsOver) {
+                        $(this).parent().find('.pop').trigger('click');
+                        birthIsOver=false;
+                    }
+                }
+                $('#btn-save').attr('disabled',nameIsOver||telIsOver||emailIsOver||birthIsOver);
+            });
+            // 新增模态框验证
+            var nameIsOver_add=false;
+            $('#add-staff-name').on('input',function () {
+                if($(this).val().length>10){
+                    if(!nameIsOver_add) {
+                        $(this).parent().find('.popover-content').text('长度不能大于10字符');
+                        $(this).parent().find('.pop').trigger('click');
+                        $(this).parent().find('.pop').css('visibility','hidden');
+                        nameIsOver_add=true;
+                    }
+                }else if($(this).val().length<=10&&$(this).val().length>0){
+                    $(this).parent().find('.pop').css('visibility','visible');
+                    if(nameIsOver_add) {
+                        $(this).parent().find('.pop').trigger('click');
+                        nameIsOver_add=false;
+                    }
+                }else {
+                    if(nameIsOver_add==true) {
+                        $(this).parent().find('.popover-content').text('职工名称不能为空');
+                        $(this).parent().find('.pop').css('visibility','hidden');
+                    }else {
+                        $(this).parent().find('.pop').trigger('click');
+                        $(this).parent().find('.pop').css('visibility','hidden');
+                        $(this).parent().find('.popover-content').text('职工名称不能为空');
+                        nameIsOver_add=true;
+                    }
+                }
+                if($('#add-staff-name').parent().find('.pop').css('visibility')=='visible'&&$('#add-staff-tel').parent().find('.pop').css('visibility')=='visible'&&$('#add-staff-email').parent().find('.pop').css('visibility')=='visible'&&$('#add-staff-birth').parent().find('.pop').css('visibility')=='visible'){
+                    $('#btn-add').attr('disabled',false);
+                }else {
+                    $('#btn-add').attr('disabled',true);
+                }
+            });
+            var telIsOver_add=false;
+            $('#add-staff-tel').on('input',function () {
+                if(!$(this).val().match(/^1[34578]\d{9}$/)){
+                    if(!telIsOver_add) {
+                        $(this).parent().find('.pop').trigger('click');
+                        $(this).parent().find('.pop').css('visibility', 'hidden');
+                        telIsOver_add=true;
+                    }
+                    if($(this).val().length==0){
+                        $(this).parent().find('.popover-content').text('手机号码不能为空');
+                    }else {
+                        $(this).parent().find('.popover-content').text('手机号码格式不正确');
+                    }
+                }else{
+                    $(this).parent().find('.pop').css('visibility','visible');
+                    if(telIsOver_add) {
+                        $(this).parent().find('.pop').trigger('click');
+                        telIsOver_add=false;
+                    }
+                }
+                if($('#add-staff-name').parent().find('.pop').css('visibility')=='visible'&&$('#add-staff-tel').parent().find('.pop').css('visibility')=='visible'&&$('#add-staff-email').parent().find('.pop').css('visibility')=='visible'&&$('#add-staff-birth').parent().find('.pop').css('visibility')=='visible'){
+                    $('#btn-add').attr('disabled',false);
+                }else {
+                    $('#btn-add').attr('disabled',true);
+                }
+            });
+            var emailIsOver_add=false;
+            $('#add-staff-email').on('input',function () {
+                if(!$(this).val().match(/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/)){
+                    if(!emailIsOver_add) {
+                        $(this).parent().find('.pop').trigger('click');
+                        $(this).parent().find('.pop').css('visibility', 'hidden');
+                        emailIsOver_add=true;
+                    }
+                    if($(this).val().length==0){
+                        $(this).parent().find('.popover-content').text('邮箱不能为空');
+                    }else {
+                        $(this).parent().find('.popover-content').text('邮箱格式为xxx@xx.xxx');
+                    }
+                }else{
+                    $(this).parent().find('.pop').css('visibility','visible');
+                    if(emailIsOver_add) {
+                        $(this).parent().find('.pop').trigger('click');
+                        emailIsOver_add=false;
+                    }
+                }
+                if($('#add-staff-name').parent().find('.pop').css('visibility')=='visible'&&$('#add-staff-tel').parent().find('.pop').css('visibility')=='visible'&&$('#add-staff-email').parent().find('.pop').css('visibility')=='visible'&&$('#add-staff-birth').parent().find('.pop').css('visibility')=='visible'){
+                    $('#btn-add').attr('disabled',false);
+                }else {
+                    $('#btn-add').attr('disabled',true);
+                }
+            });
+            var birthIsOver_add=false;
+            $('#add-staff-birth').on('input',function () {
+                if(!$(this).val().match(/^[12]\d{3}[-](0[123456789]|1[012])[-](0[1-9]|[12][0-9]|3[01])$/)){
+                    if(!birthIsOver_add) {
+                        $(this).parent().find('.pop').trigger('click');
+                        $(this).parent().find('.pop').css('visibility', 'hidden');
+                        birthIsOver_add=true;
+                    }
+                    if($(this).val().length==0){
+                        $(this).parent().find('.popover-content').text('生日不能为空');
+                    }else {
+                        $(this).parent().find('.popover-content').text('日期格式为1996-08-09');
+                    }
+                }else{
+                    $(this).parent().find('.pop').css('visibility','visible');
+                    if(birthIsOver_add) {
+                        $(this).parent().find('.pop').trigger('click');
+                        birthIsOver_add=false;
+                    }
+                }
+                if($('#add-staff-name').parent().find('.pop').css('visibility')=='visible'&&$('#add-staff-tel').parent().find('.pop').css('visibility')=='visible'&&$('#add-staff-email').parent().find('.pop').css('visibility')=='visible'&&$('#add-staff-birth').parent().find('.pop').css('visibility')=='visible'){
+                    $('#btn-add').attr('disabled',false);
+                }else {
+                    $('#btn-add').attr('disabled',true);
+                }
+            });
+        };
+        //动态渲染方法
+        function load(depart,post,name) {
+            $('#searchResult').hide();
+            var limit = 7;
+            data(currPage, limit,depart,post,name);
+            // createTable(1, limit, totalCount);
+            $('#callBackPager').extendPagination({
+                totalCount: totalCount,
+                limit: limit,
+                callback: function(curr, limit) {
+                    data(curr, limit,depart,post,name);
+                }
+            });
+        }
+        //查找的事件
+        $('#inputName').focus(function () {
+            $('#searchResult').hide();
+        });
+        $('#inputPost').focus(function () {
+            $('#searchResult').hide();
+        });
+        $('#search-btn').click(function () {
+            var searchName=$('#inputName').val();
+            var searchPost=$('#inputPost').val();
+            load('',searchPost,searchName);
+        });
+        $('#searchAll-btn').click(function () {
+           load('','','');
+        });
+        //获取数据内部对象
+        function data(curr,limit,depart,post,name) {
+            totalCount=parent.staffArr.data.total;
+            if(depart!=''||post!=''||name!=''){
+                totalCount=0;
+                dataList=[];
+                for(var i=0;i<parent.staffArr.data.records.length;i++){
+                    if(parent.staffArr.data.records[i].depart==depart){
+                        dataList.push(parent.staffArr.data.records[i]);
+                        totalCount++;
+                    }
+                    if(($.trim(post)!='')&&($.trim(name)!='')){
+                        if((parent.staffArr.data.records[i].post.search(post)>-1)&&(parent.staffArr.data.records[i].name.search(name)>-1)){
+                            dataList.push(parent.staffArr.data.records[i]);
+                            totalCount++;
+                        }
+                    }
+                    if(($.trim(post)=='')&&($.trim(name)!='')){
+                        if((parent.staffArr.data.records[i].name.search(name)>-1)){
+                            dataList.push(parent.staffArr.data.records[i]);
+                            totalCount++;
+                        }
+                    }
+                    if(($.trim(post)!='')&&($.trim(name)=='')){
+                        if((parent.staffArr.data.records[i].post.search(post)>-1)){
+                            dataList.push(parent.staffArr.data.records[i]);
+                            totalCount++;
+                        }
+                    }
+                }
+                if(dataList.length==0){
+                    dataList=parent.staffArr.data.records;
+                    totalCount=parent.staffArr.data.total;
+                    $('#searchResult').show();
+                }
+            }else {
+                dataList=parent.staffArr.data.records;
+                $('#searchResult').hide();
+            }
+            createTable(curr,limit,totalCount)
+        }
+        //创建表格
+        function createTable(currPage, limit, total) {
+            var html=[], showNum=limit;
+            html.push('<table class="table table-striped ">');
+            html.push('<thead><tr><th>ID</th><th>姓名</th><th>性别</th><th>手机</th><th>职称</th><th>部门</th><th>邮箱</th><th>生日</th><th>操作</th></thead><tbody>');
+            if(total - (currPage * limit) < 0) {
+                showNum = total - ((currPage - 1) * limit);
+            }
+            for(var i = 0; i < showNum; i++) {
+                html.push('<tr data-index='+(i+((currPage-1) * limit))+'>');
+                html.push('<td>' + dataList[i+((currPage-1) * limit)].id + '</td>');
+                html.push('<td>' + dataList[i+((currPage-1) * limit)].name + '</td>');
+                html.push('<td>' + dataList[i+((currPage-1) * limit)].sex + '</td>');
+                html.push('<td>' + dataList[i+((currPage-1) * limit)].tel + '</td>');
+                html.push('<td>' + dataList[i+((currPage-1) * limit)].post + '</td>');
+                html.push('<td>' + dataList[i+((currPage-1) * limit)].depart + '</td>');
+                html.push('<td>' + dataList[i+((currPage-1) * limit)].email + '</td>');
+                html.push('<td>' + dataList[i+((currPage-1) * limit)].birth + '</td>');
+                html.push('<td><button class="edit"><span class="iconfont icon-xiugai"></span>编辑</button><button class="del btn-danger"><span class="iconfont icon-shanchu"></span>删除</button></td>');
+                html.push('</tr>');
+            }
+            html.push('</tbody></table>');
+            var $table=$('.table');
+            $table.empty();
+            $table.html(html.join(''));
+            // 编辑按钮事件
+            $('.edit').click(function () {
+                $('#updateModal').modal();
+                $('#updateModal .popover').css('display','none');
+                $('#updateModal').find('.pop').css('visibility','visible');
+                var id=$(this).parents('tr').find('td:first-child').text();
+                var index;
+                var sex;
+                for(var i=0;i<parent.staffArr.data.records.length;i++){
+                    if(parent.staffArr.data.records[i].id==id){
+                        index=i;
+                    }
+                }
+                if(parent.staffArr.data.records[index].sex=='男'){
+                    sex='male';
+                }else {
+                    sex='female';
+                }
+                $('#updateModal').find('#staff-name').val(parent.staffArr.data.records[index].name);
+                $('#updateModal').find('#staff-tel').val( parent.staffArr.data.records[index].tel);
+                $('#updateModal').find('#staff-post').find('option:contains('+parent.staffArr.data.records[index].post+')').prop('selected',true).siblings().removeAttr('selected');
+                $('#updateModal').find('#staff-depart').find('option:contains('+parent.staffArr.data.records[index].depart+')').prop('selected',true).siblings().removeAttr('selected');
+                $('#updateModal').find('#staff-email').val( parent.staffArr.data.records[index].email);
+                $('#updateModal').find('#staff-birth').val( parent.staffArr.data.records[index].birth);
+                $('#updateModal').find('#staff-sex-'+sex).prop('checked',true).siblings().removeAttr('checked');
+                $('#updateModal').find('#btn-save').off('click').click(function () {
+                    parent.staffArr.data.records[index].name=$('#updateModal').find('#staff-name').val();
+                    parent.staffArr.data.records[index].tel=$('#updateModal').find('#staff-tel').val();
+                    parent.staffArr.data.records[index].post= $('#updateModal').find('#staff-post').find('option:selected').text();
+                    for(var i=0;i<parent.departData.length;i++){
+                        if(parent.staffArr.data.records[index].depart==parent.departData[i].name){
+                            parent.departData[i].num--;
+                        }
+                    }
+                    parent.staffArr.data.records[index].depart= $('#updateModal').find('#staff-depart').find('option:selected').text();
+                    for(var i=0;i<parent.departData.length;i++){
+                        if(parent.staffArr.data.records[index].depart==parent.departData[i].name){
+                            parent.departData[i].num++;
+                        }
+                    }
+                    parent.staffArr.data.records[index].email=$('#updateModal').find('#staff-email').val();
+                    parent.staffArr.data.records[index].birth=$('#updateModal').find('#staff-birth').val();
+                    parent.staffArr.data.records[index].sex=$('#updateModal').find('#staff-sex').find('input:checked+label+span').text();
+                    $("#updateModal").modal('hide');
+                    load('','','');
+                });
+            });
+            // 删除按钮事件
+            $('.del').click(function () {
+                $('#deleteModal').modal();
+                $('#btn-del').attr('disabled',true);
+                var id=$(this).parents('tr').find('td:first-child').text();
+                var index;
+                for(var i=0;i<parent.staffArr.data.records.length;i++){
+                    if(parent.staffArr.data.records[i].id==id){
+                        index=i;
+                        for(var j=0;j<parent.classData.length;j++){
+                            // if(parent.staffArr.data.records[i].name ==parent.classData[j].instructor){
+                            //     $('#btn-del').attr('disabled',true);
+                            //     break;
+                            // }else {
+                            //     $('#btn-del').attr('disabled', false);
+                            // }
+                            if(parent.classData[j].status!='已毕业'){
+                                if(parent.staffArr.data.records[i].name ==parent.classData[j].instructor){
+                                    $('#btn-del').attr('disabled',true);
+                                    break;
+                                }else {
+                                    $('#btn-del').attr('disabled', false);
+                                }
+                            }
+
+                        }
+                    }
+                }
+
+                $('#deleteModal').find('#btn-del').off('click').click(function () {
+                    for(var i=0;i<parent.departData.length;i++){
+                        if(parent.departData[i].name==parent.staffArr.data.records[index].depart){
+                            parent.departData[i].num--;
+                        }
+                    }
+                    parent.staffArr.data.records.splice(index,1);
+                    parent.staffArr.data.total-=1;
+                    $("#deleteModal").modal('hide');
+                    load('','','');
+                });
+            });
+        };
+    </script>
+</body>
+</html>

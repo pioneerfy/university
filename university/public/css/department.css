@@ -1,0 +1,150 @@
+body,html{
+    min-width: 1000px;
+}
+.wrap{
+    /*width: 992px;*/
+    width: 80%;
+    min-width: 992px;
+    margin: 40px auto;
+    padding: 0 10px;
+}
+.header-h1>span{
+    cursor: pointer;
+}
+.header-h1{
+    height: 100%;
+    line-height: 60px;
+}
+.icon-guanli{
+    font-size: 20px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+.table{
+    border-radius: 6px;
+    overflow: hidden;
+}
+table{
+    box-shadow: 0 3px 10px -3px #a8a8a8;
+    text-align: center;
+    border: 1px solid #b8b8b8;
+}
+table td{
+    font-size: 14px;
+}
+table th{
+    text-align: center;
+}
+table td>button{
+    margin-left: 10px;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+    border-radius: 10%;
+}
+table td>.edit{
+    background-color: #2196f3;
+}
+table td>.select{
+    background-color: #7b4397;
+}
+table td>.edit:hover{
+    background-color: #1b7ac5;
+}
+table td>.select:hover{
+    background-color: #633679;
+}
+#callBackPager{
+    text-align: right;
+}
+thead{
+    font-size: 16px;
+    background: linear-gradient(to left, #7b4397, #2196f3);
+    color: white;
+}
+.table-striped > tbody > tr{
+    background-color: white;
+}
+.table > tbody > tr > td{
+    vertical-align: middle;
+}
+.table-striped > tbody > tr:hover{
+    background-color: #eef5f9;
+}
+/*分页*/
+.pagination .active a:focus{
+    background-color: #7b4397;
+    border-color: #7b4397;
+}
+.pagination .active a:hover{
+    background-color: #7b4397;
+    border-color: #7b4397;
+}
+.pagination .active a{
+    background-color: #7b4397;
+    border-color: #7b4397;
+}
+.add{
+    text-align: right;
+}
+/*模态框*/
+h4{
+    font-size: 20px;
+    font-weight: bold;
+}
+.modal-body{
+    padding: 15px 40px;
+}
+.control-label{
+    font-weight: normal;
+}
+input{
+    resize: none;
+    border: none;
+    outline: none;
+}
+.form-group{
+    margin-bottom: 20px;
+}
+input.form-control{
+    display: inline-block;
+    width: 50%;
+    margin-left: 5%;
+    vertical-align: middle;
+}
+.pop{
+    visibility: hidden;
+    color: green;
+}
+textarea.form-control{
+    display: inline-block;
+    width: 50%;
+    margin-left: 5%;
+    resize: none;
+    vertical-align: middle;
+}
+.modal-header,.modal-footer{
+    border: none;
+}
+#btn-add-depart{
+    background-color: #f9f9f9;
+    color: #444;
+    outline: none;
+    border: 1px solid #b8b8b8;
+    margin-left: 10px;
+    padding: 10px 10px;
+    border-radius: 10%;
+}
+#btn-add-depart:hover{
+    background-color: #f1f1f1;
+}
+.modal-footer button{
+    outline: none;
+}
+.modal-footer .btn-primary{
+    background-color: #2196f3;
+}
+.modal-footer .btn-primary:hover{
+    background-color: #1b7ac5;
+}

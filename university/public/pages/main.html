@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+    <!--声明当前页面的编码集：中文编码（gbk/gb2313），国际编码（utf-8）-->
+    <meta http-equiv="Contet-Type" content="text/html;charset=utf-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML国际化标准模板</title>
+    <meta name="keywords" content="关键词，关键词，关键词">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="../libs/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../fonts/iconfont.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <style type="text/css">
+    </style>
+
+    <!--css/js-->
+
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" title="logoTitle" href="#"><img src="../images/main/logo.jpg" alt=""></a>
+                    <div class="fr">
+                        <span>当前用户：</span>
+                        <div class="head-wrap">
+                            <div class="head"></div>
+                            <div class="downlist">
+                                <ul>
+                                    <li>用户名：<span></span></li>
+                                    <li>用户等级：<span></span></li>
+                                    <li><a href="information.html" target="mainFrame"><span class="iconfont icon-yonghu"></span> 个人中心</a></li>
+                                    <li class="logout"><a href="../login.html"><span class="iconfont icon-tuichu"></span> 退出登录</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li role="presentation">
+                            <div class="head-wrap">
+                                <div class="head"></div>
+                            </div>
+                        </li>
+                        <li role="presentation">
+                            <a>用户名：<span class="badge username">admin</span></a>
+                        </li>
+                        <li role="presentation">
+                            <a>用户等级：<span class="badge userLevel"></span></a>
+                        </li>
+                        <li>
+                            <a href="">|</a>
+                        </li>
+                        <li>
+                            <a href="information.html" target="mainFrame"><span class="iconfont icon-yonghu"></span> 个人中心</a>
+                        </li>
+                        <li class="logout">
+                            <a href="../login.html"><span class="iconfont icon-tuichu"></span> 退出登录</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- 中间主体内容部分 -->
+    <div class="pageContainer">
+        <!-- 左侧导航栏 -->
+        <div class="pageSidebar">
+
+        </div>
+        <!-- 正文内容部分 -->
+        <div class="pageContent">
+            <iframe src="homepage.html" id="mainFrame" name="mainFrame" frameborder="0" width="100%"  height="100%" frameBorder="0"></iframe>
+        </div>
+    </div>
+    <script src="../libs/jQuery/jquery-1.11.1.js"></script>
+    <script src="../libs/bootstrap/js/bootstrap.js"></script>
+    <script src="../datas/data.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,303 @@
+body,html{
+    min-width: 1000px;
+}
+.header-h1>span{
+    cursor: pointer;
+}
+.header-h1{
+    height: 100%;
+    line-height: 60px;
+}
+.icon-shezhi{
+    font-size: 20px;
+    margin-right: 5px!important;
+    vertical-align: middle;
+}
+.wrap{
+    width: 80%;
+    min-width: 992px;
+    margin: 40px auto;
+    padding: 0 10px;
+}
+.table{
+    border-radius: 6px;
+    overflow: hidden;
+}
+table{
+    box-shadow: 0 3px 10px -3px #a8a8a8;
+    text-align: center;
+    border: 1px solid #b8b8b8;
+}
+table td{
+    font-size: 14px;
+}
+table th{
+    text-align: center;
+}
+table td>button{
+    margin-left: 10px;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+    border-radius: 10%;
+}
+table td>.edit{
+    background-color: #2196f3;
+}
+table td>.select{
+    background-color: #7b4397;
+}
+table td>.edit:hover{
+    background-color: #1b7ac5;
+}
+table td>.select:hover{
+    background-color: #633679;
+}
+#callBackPager{
+    text-align: right;
+}
+thead{
+    font-size: 16px;
+    background: linear-gradient(to left, #7b4397, #2196f3);
+    color: white;
+}
+.table-striped > tbody > tr{
+    background-color: white;
+}
+.table > tbody > tr > td{
+    vertical-align: middle;
+}
+.table-striped > tbody > tr:hover{
+    background-color: #eef5f9;
+}
+#searchResult{
+    color: red;
+    margin-left: 5px;
+}
+#btn-add-staff{
+    background-color: #f9f9f9;
+    color: #444;
+    outline: none;
+    border: 1px solid #b8b8b8;
+    margin-left: 10px;
+    padding: 10px 10px;
+    border-radius: 10%;
+}
+#btn-add-staff:hover{
+    background-color: #f1f1f1;
+}
+/*分页*/
+.pagination .active a:focus{
+    background-color: #7b4397;
+    border-color: #7b4397;
+}
+.pagination .active a:hover{
+    background-color: #7b4397;
+    border-color: #7b4397;
+}
+.pagination .active a{
+    background-color: #7b4397;
+    border-color: #7b4397;
+}
+.add{
+    text-align: right;
+}
+/*模态框*/
+h4{
+    font-size: 20px;
+    font-weight: bold;
+}
+.modal-body{
+    padding: 15px 40px;
+}
+.control-label{
+    font-weight: normal;
+}
+input{
+    resize: none;
+    border: none;
+    outline: none;
+}
+.form-group{
+    margin-bottom: 20px;
+}
+input.form-control{
+    display: inline-block;
+    width: 50%;
+    margin-left: 5%;
+    vertical-align: middle;
+}
+.pop{
+    visibility: hidden;
+    color: green;
+}
+.modal-header,.modal-footer{
+    border: none;
+}
+#btn-add-depart{
+    background-color: #f9f9f9;
+    color: #444;
+    outline: none;
+    border: 1px solid #b8b8b8;
+    margin-left: 10px;
+    padding: 10px 10px;
+    border-radius: 10%;
+}
+#btn-add-depart:hover{
+    background-color: #f1f1f1;
+}
+.modal-footer button{
+    outline: none;
+}
+.modal-footer .btn-primary{
+    background-color: #2196f3;
+}
+.modal-footer .btn-primary:hover{
+    background-color: #1b7ac5;
+}
+.btn-group .dropdown-menu{
+
+}
+select{
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 150px;
+    padding: 6px 12px 6px 12px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+.down-list{
+    display: inline-block;
+    position: relative;
+    margin-left: 5%;
+}
+.down-list:after{
+    content: "";
+    width: 14px;
+    height: 8px;
+    background: url(../images/student/xiala.png) no-repeat center;
+    position: absolute;
+    right: 12px;
+    top: 45%;
+    pointer-events: none;
+}
+.radios{
+    display: inline-block;
+    margin-left: 5%;
+}
+input[type="checkbox"]{
+    width: 13px;
+    height: 13px;
+    background-color: #fff;
+    -webkit-appearance:none;
+    border: 1px solid #c9c9c9;
+    border-radius: 2px;
+    outline: none;
+}
+input[type="checkbox"]:checked{
+    background: url("../images/student/gouxuan.png")no-repeat center;
+}
+/*搜索*/
+.search{
+    margin-bottom: 5px;
+}
+.search .s-label{
+    margin-right: 5px;
+}
+.search .form-control.s_input{
+    width: 150px;
+    margin-left: 0;
+}
+.search #search-btn,#searchAll-btn{
+    color: white;
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+    border-radius: 10%;
+    background-color: #2196f3;
+}
+.search #searchAll-btn{
+    background-color: #7b4397;
+}
+.search .icon-chazhao{
+    vertical-align: middle;
+    font-size: 14px;
+    margin-right: 3px;
+}
+.iconfont{
+    margin-right: 2px;
+}
+.revise-role p{
+    text-align: center;
+}
+.label1{
+    padding-top: 10px;
+    padding-left: 62px;
+
+}
+.box{
+    position: relative;
+    line-height: 30px;
+    color: black;
+    margin-left:34%;
+}
+
+input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+}
+
+label {
+    position: absolute;
+    left: 5px;
+    top: 8px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #999;
+    cursor: pointer;
+}
+.label1 span{
+   margin-left: 13px;
+}
+
+input:checked+label {
+    background-color: #006eb2;
+    border: 1px solid #006eb2;
+}
+
+input:checked+label::after {
+    position: absolute;
+    content: "";
+    width: 5px;
+    height: 10px;
+    top: 3px;
+    left: 6px;
+    border: 2px solid #fff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+}
+
+
+.revise .revise-role .pick{
+    color: white;
+    margin-top: 10px;
+    margin-left: 130px;
+    transition: all .5s;
+}
+@media screen and (max-width:1024px){
+    form{
+        width: 800px;
+    }
+}
+@media screen and (max-width:768px) {
+    form {
+        width: 250px;
+    }
+}

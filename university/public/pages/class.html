@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>班级管理</title>
+    <link rel="stylesheet" href="../libs/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../fonts/iconfont.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/class.css">
+</head>
+<body>
+    <header class="header">
+        <h1 class="header-h1"><span class="iconfont icon-biaoge"></span><span>班级管理</span></h1>
+    </header>
+    <div class="wrap">
+        <div class="search">
+            <button class="endSelect" id="searchAll-btn">查看毕业班级</button>
+        </div>
+        <div class="table">
+
+        </div>
+        <div class="addDiv clear">
+            <!--<div class="left">
+                <input type="checkbox" id="all" style="margin-left: 24.4px;"><label for="all" class="not" style="color:#666666;padding-left: 10px;padding-right: 20px;">全&nbsp;选</label>
+                <button class="allDel btn-danger ">删除</button>
+            </div>-->
+            <div class="right">
+                <button class="add"><span class="iconfont icon-xinzeng" style="margin-right: 2px;"></span>新增班级</button>
+            </div>
+        </div>
+        <nav id='callBackPager'></nav>
+        <!-- 新增 -->
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="addModalLabel">新增班级</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="">
+                            <!-- 班级代码 -->
+                            <div class="body-line clear">
+                                <label for="addId">班级代码</label>
+                                <input class="value form-control" id="addId" placeholder="请输入班级代码" type="number" readonly>
+                            </div>
+                            <!-- 班级名称 -->
+                            <div class="body-line clear">
+                                <label for="addName">班级名称</label>
+                                <div class="class">
+                                    <select id="addName">
+                                        <option value="政治学与行政学">政治学与行政学</option>
+                                        <option value="社会学">社会学</option>
+                                        <option value="科学社会主义">科学社会主义</option>
+                                        <option value="体育">体育</option>
+                                        <option value="计算机科学与技术">计算机科学与技术</option>
+                                        <option value="电子商务">电子商务</option>
+                                        <option value="会计学">会计学</option>
+                                        <option value="信息工程">信息工程</option>
+                                        <option value="商务英语">商务英语</option>
+                                        <option value="算法工程">算法工程</option>
+                                        <option value="播音主持">播音主持</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- 辅导员 -->
+                            <div class="body-line clear">
+                                <label for="addInstructor">辅导员</label>
+                                <div class="class">
+                                    <select id="addInstructor">
+                                        <option value="高唯严">高唯严</option>
+                                        <option value="苏小博">苏小博</option>
+                                        <option value="周珂宇">周珂宇</option>
+                                        <option value="李文红">李文红</option>
+                                        <option value="肖福麟">肖福麟</option>
+                                        <option value="李茂">李茂</option>
+                                        <option value="邓旭梅">邓旭梅</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- 年级 -->
+                            <div class="body-line clear">
+                                <label for="addRankSelect">年级</label>
+                                <input class="value form-control" id="addRankSelect" value="2018" type="number" readonly>
+                            </div>
+                            <!-- 班级人数 -->
+                            <!--<div class="body-line clear">-->
+                                <!--<label for="addNum">班级人数</label>-->
+                                <!--<input class="value form-control" id="addNum" placeholder="请输入班级人数" type="number">-->
+                            <!--</div>-->
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btn-add" class="btn btn-primary">新增</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 新增警告 -->
+        <div class="modal fade" id="addAlertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="addAlertModalLabel">新增警告</h4>
+                    </div>
+                    <div class="modal-body">
+                        该班已存在！！
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 修改 -->
+        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">编辑班级信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="">
+                            <!-- 班级代码 -->
+                            <div class="body-line clear">
+                                <label for="classId">班级代码</label>
+                                <input class="value form-control" id="classId" placeholder="请输入班级代码" type="text" readonly>
+                            </div>
+                            <!-- 班级名称 -->
+                            <div class="body-line clear">
+                                <label for="editClassNameSelect">班级名称</label>
+                                <input class="value form-control" id="editClassNameSelect" placeholder="请输入班级代码" type="text" readonly>
+                            </div>
+                            <!-- 辅导员 -->
+                            <div class="body-line clear">
+                                <label for="editInstructorSelect">辅导员</label>
+                                <div class="class" disabled="">
+                                    <select id="editInstructorSelect">
+                                        <option value="高唯严">高唯严</option>
+                                        <option value="苏小博">苏小博</option>
+                                        <option value="周珂宇">周珂宇</option>
+                                        <option value="李文红">李文红</option>
+                                        <option value="肖福麟">肖福麟</option>
+                                        <option value="李茂">李茂</option>
+                                        <option value="邓旭梅">邓旭梅</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- 年级 -->
+                            <div class="body-line clear">
+                                <label for="editRankSelect">年级</label>
+                                <div class="class">
+                                    <select id="editRankSelect">
+                                        <option value="2013">2013</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- 班级人数 -->
+                            <div class="body-line clear">
+                                <label for="classNum">班级人数</label>
+                                <input class="value form-control" id="classNum" type="number" readonly>
+                            </div>
+                            <!-- 是否毕业 -->
+                            <div class="body-line clear">
+                                <label for="classState">是否毕业</label>
+                                <input class="value form-control" id="classState"  type="text" readonly>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btn-save" class="btn btn-primary">保存修改</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 升班 -->
+        <div class="modal fade" id="upModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="upModalLabel">升班</h4>
+                    </div>
+                    <div class="modal-body">
+                        确认升班吗？
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btn-up">确认</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 升班失败 -->
+        <div class="modal fade" id="upFalseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="upFalseModalLabel">升班警告</h4>
+                    </div>
+                    <div class="modal-body">
+                        本班已经毕业，升班失败！！
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 升班毕业 -->
+        <div class="modal fade" id="upEndModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="upEndModalLabel">毕业成功</h4>
+                    </div>
+                    <div class="modal-body">
+                        祝贺本班已经毕业！！
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 升班警告 -->
+        <div class="modal fade" id="upAlertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="upAlertModalLabel">升班警告</h4>
+                    </div>
+                    <div class="modal-body">
+                        当前班级人数为0，升班失败！！
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 删除 -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="deleteModalLabel">删除班级</h4>
+                    </div>
+                    <div class="modal-body">
+                        确定要删除该班级吗？
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btn-del">确认删除</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 删除警告 -->
+        <div class="modal fade" id="delAlertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="delAlertModalLabel">删除警告</h4>
+                    </div>
+                    <div class="modal-body">
+                        该班还存在学生，不能删除！！
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 全部删除 -->
+        <div class="modal fade" id="deleteAllModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="deleteAllModalLabel">删除数据</h4>
+                    </div>
+                    <div class="modal-body">
+                        确认删除当前页所有数据吗？
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btn-delAll">确认删除</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 全部删除警告 -->
+        <div class="modal fade" id="delAllAlertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="delAllAlertModalLabel">删除警告</h4>
+                    </div>
+                    <div class="modal-body">
+                        还未选择数据！！
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../libs/jQuery/jquery-1.11.1.js"></script>
+    <script src="../libs/bootstrap/js/bootstrap.js"></script>
+    <script src="../plugins/pagination/extendPagination.js"></script>
+    <script src="../js/class.js"></script>
+</body>
+</html>

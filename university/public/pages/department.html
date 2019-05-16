@@ -1,0 +1,417 @@
+<!doctype html>
+<html>
+<head>
+    <!--声明当前页面的编码集：中文编码（gbk/gb2313），国际编码（utf-8）-->
+    <meta http-equiv="Contet-Type" content="text/html;charset=utf-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML国际化标准模板</title>
+    <meta name="keywords" content="关键词，关键词，关键词">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="../libs/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../fonts/iconfont.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/department.css">
+    <style type="text/css">
+    </style>
+
+    <!--css/js-->
+
+
+</head>
+<body>
+    <!--<div id="main"></div>-->
+    <header class="header">
+        <h1 class="header-h1"><span class="iconfont icon-guanli"></span><span>部门管理</span></h1>
+    </header>
+    <div class="wrap">
+       <div class="table">
+
+       </div>
+        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="updateModalLabel">编辑部门信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="depart-name" class="control-label">部门名称</label>
+                                <input type="text" class="form-control" id="depart-name">
+                                <span  class="pop popname"  data-toggle="popover" data-content="长度不能大于10字符"><span class="iconfont icon-gou"></span></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="depart-des" class="control-label">部门描述</label>
+                                <textarea class="form-control" id="depart-des"></textarea>
+                                <span  class="pop popdes"  data-toggle="popover" data-content="长度不能大于20字符"><span class="iconfont icon-gou"></span></span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btn-save">保存修改</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="deleteModalLabel">删除部门</h4>
+                    </div>
+                    <div class="modal-body">
+                        确定要删除该部门吗？(部门人数为0的时候才能删除该部门)
+                    </div>
+                    <div class="modal-footer">
+                        <button disabled='true' type="button" class="btn btn-primary" id="btn-del">确认删除</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="addModalLabel">新增部门</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="add-depart-name" class="control-label">部门名称</label>
+                                <input type="text" class="form-control" id="add-depart-name" placeholder="如：学生会">
+                                <span  class="pop popname"  data-toggle="popover" data-content="长度不能大于10字符"><span class="iconfont icon-gou"></span></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="add-depart-des" class="control-label">部门描述</label>
+                                <textarea class="form-control" id="add-depart-des" placeholder="如：负责日常学生事务"></textarea>
+                                <span  class="pop popdes"  data-toggle="popover" data-content="长度不能大于20字符"><span class="iconfont icon-gou"></span></span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button disabled='true' type="button" class="btn btn-primary" id="btn-add">确认新增</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="add">
+            <button id="btn-add-depart"><span class="iconfont icon-xinzeng"></span> 新增部门</button>
+        </div>
+        <nav id='callBackPager'>
+        </nav>
+    </div>
+    <script src="../libs/jQuery/jquery-1.11.1.js"></script>
+    <script src="../libs/bootstrap/js/bootstrap.js"></script>
+    <script src="../plugins/pagination/extendPagination.js"></script>
+    <script>
+        <!--var myChart = echarts.init(document.getElementById('main'));-->
+        <!--option = {-->
+            <!--backgroundColor: '#2c343c',-->
+
+            <!--title: {-->
+                <!--text: 'Customized Pie',-->
+                <!--left: 'center',-->
+                <!--top: 20,-->
+                <!--textStyle: {-->
+                    <!--color: '#ccc'-->
+                <!--}-->
+            <!--},-->
+
+            <!--tooltip : {-->
+                <!--trigger: 'item',-->
+                <!--formatter: "{a} <br/>{b} : {c} ({d}%)"-->
+            <!--},-->
+
+            <!--visualMap: {-->
+                <!--show: false,-->
+                <!--min: 80,-->
+                <!--max: 600,-->
+                <!--inRange: {-->
+                    <!--colorLightness: [0, 1]-->
+                <!--}-->
+            <!--},-->
+            <!--series : [-->
+                <!--{-->
+                    <!--name:'访问来源',-->
+                    <!--type:'pie',-->
+                    <!--radius : '55%',-->
+                    <!--center: ['50%', '50%'],-->
+                    <!--data:[-->
+                        <!--{value:1, name:'教务处人数'},-->
+                        <!--{value:2, name:'保卫部人数'},-->
+                        <!--{value:3, name:'财务部人数'},-->
+                        <!--{value:4, name:'学生会人数'}-->
+                    <!--].sort(function (a, b) { return a.value - b.value; }),-->
+                    <!--roseType: 'radius',-->
+                    <!--label: {-->
+                        <!--normal: {-->
+                            <!--textStyle: {-->
+                                <!--color: 'rgba(255, 255, 255, 0.3)'-->
+                            <!--}-->
+                        <!--}-->
+                    <!--},-->
+                    <!--labelLine: {-->
+                        <!--normal: {-->
+                            <!--lineStyle: {-->
+                                <!--color: 'rgba(255, 255, 255, 0.3)'-->
+                            <!--},-->
+                            <!--smooth: 0.2,-->
+                            <!--length: 10,-->
+                            <!--length2: 20-->
+                        <!--}-->
+                    <!--},-->
+                    <!--itemStyle: {-->
+                        <!--normal: {-->
+                            <!--color: '#c23531',-->
+                            <!--shadowBlur: 200,-->
+                            <!--shadowColor: 'rgba(0, 0, 0, 0.5)'-->
+                        <!--}-->
+                    <!--},-->
+
+                    <!--animationType: 'scale',-->
+                    <!--animationEasing: 'elasticOut',-->
+                    <!--animationDelay: function (idx) {-->
+                        <!--return Math.random() * 200;-->
+                    <!--}-->
+                <!--}-->
+            <!--]-->
+        <!--};-->
+        <!--myChart.setOption(option);-->
+    </script>
+    <script>
+        var currPage = 1;
+        var totalCount,
+            dataList=[];
+        window.onload = function() {
+            load();
+            $(function () {
+                $('[data-toggle="popover"]').popover()
+            });
+            var nameIsOver=false;
+            $('#depart-name').on('input',function () {
+                if($('#depart-name').val().length>10){
+                    if(!nameIsOver) {
+                        $(this).parent().find('.popover-content').text('长度不能大于10字符');
+                        $(this).parent().find('.pop').css('visibility','hidden');
+                        $(this).parent().find('.pop').trigger('click');
+                        nameIsOver=true;
+                    }
+                }else if($('#depart-name').val().length<=10&&$('#depart-name').val().length>0){
+                    $(this).parent().find('.pop').css('visibility','visible');
+                    if(nameIsOver) {
+                        $(this).parent().find('.pop').trigger('click');
+                        nameIsOver=false;
+                    }
+                }else {
+                    if(nameIsOver==true) {
+                        $(this).parent().find('.popover-content').text('部门名称不能为空');
+                        $(this).parent().find('.pop').css('visibility','hidden');
+                    }else {
+                        $(this).parent().find('.pop').trigger('click');
+                        $(this).parent().find('.popover-content').text('部门名称不能为空');
+                        $(this).parent().find('.pop').css('visibility','hidden');
+                        nameIsOver=true;
+                    }
+                }
+                $('#btn-save').attr('disabled',desIsOver||nameIsOver);
+            });
+            var desIsOver=false;
+            $('#depart-des').on('input',function () {
+                if($('#depart-des').val().length>20){
+                    if(!desIsOver) {
+                        $(this).parent().find('.popover-content').text('长度不能大于20字符');
+                        $(this).parent().find('.pop').css('visibility','hidden');
+                        $(this).parent().find('.pop').trigger('click');
+                        desIsOver=true;
+                    }
+                }else if($('#depart-des').val().length<=20&&$('#depart-des').val().length>0){
+                    $(this).parent().find('.pop').css('visibility','visible');
+                    if(desIsOver) {
+                        $(this).parent().find('.pop').trigger('click');
+                        desIsOver=false;
+                    }
+                }else {
+                    if(desIsOver==true) {
+                        $(this).parent().find('.popover-content').text('部门描述不能为空');
+                        $(this).parent().find('.pop').css('visibility','hidden');
+                    }else {
+                        $(this).parent().find('.pop').trigger('click');
+                        $(this).parent().find('.popover-content').text('部门描述不能为空');
+                        $(this).parent().find('.pop').css('visibility','hidden');
+                        desIsOver=true;
+                    }
+                }
+                $('#btn-save').attr('disabled',desIsOver||nameIsOver);
+            });
+            $('#btn-add-depart').click(function () {
+                $('#addModal').modal();
+                var leng=parent.departData.length;
+                $('#addModal .popover').css('display','none');
+                $('#addModal').find('#add-depart-name').val('');
+                $('#addModal').find('#add-depart-des').val('');
+                $('#addModal').find('.pop').css('visibility','hidden');
+                $('#addModal').find('#btn-add').off('click').click(function () {
+                    parent.departData.push({
+                        'id':parent.departData[leng-1].id+1,
+                        'name':$('#addModal').find('#add-depart-name').val(),
+                        'num':0,
+                        'des':$('#addModal').find('#add-depart-des').val()
+                    });
+                    $("#addModal").modal('hide');
+                    load();
+                });
+            });
+            var nameIsOver_add=false;
+            $('#add-depart-name').on('input',function () {
+                if($('#add-depart-name').val().length>10){
+                    if(!nameIsOver_add) {
+                        $(this).parent().find('.popover-content').text('长度不能大于10字符');
+                        $(this).parent().find('.pop').css('visibility','hidden');
+                        $(this).parent().find('.pop').trigger('click');
+                        nameIsOver_add=true;
+                    }
+                }else if($('#add-depart-name').val().length<=10&&$('#add-depart-name').val().length>0){
+                    $(this).parent().find('.pop').css('visibility','visible');
+                    if(nameIsOver_add) {
+                        $(this).parent().find('.pop').trigger('click');
+                        nameIsOver_add=false;
+                    }
+                }else {
+                    if(nameIsOver_add==true) {
+                        $(this).parent().find('.popover-content').text('部门名称不能为空');
+                        $(this).parent().find('.pop').css('visibility','hidden');
+                    }else {
+                        $(this).parent().find('.pop').trigger('click');
+                        $(this).parent().find('.popover-content').text('部门名称不能为空');
+                        $(this).parent().find('.pop').css('visibility','hidden');
+                        nameIsOver_add=true;
+                    }
+                }
+                if(($('#add-depart-des').val().length<20&&$('#add-depart-des').val().length>0)&&($('#add-depart-name').val().length<10&&$('#add-depart-name').val().length>0)){
+                    $('#btn-add').attr('disabled',false);
+                }else {
+                    $('#btn-add').attr('disabled',true);
+                }
+            });
+            var desIsOver_add=false;
+            $('#add-depart-des').on('input',function () {
+                if($('#add-depart-des').val().length>20){
+                    if(!desIsOver_add) {
+                        console.log($(this).parent().find('.popover-content'));
+                        $(this).parent().find('.popover-content').text('长度不能大于20字符');
+                        $(this).parent().find('.pop').css('visibility','hidden');
+                        $(this).parent().find('.pop').trigger('click');
+                        desIsOver_add=true;
+                    }
+                }else if($('#add-depart-des').val().length<=20&&$('#add-depart-des').val().length>0){
+                    $(this).parent().find('.pop').css('visibility','visible');
+                    if(desIsOver_add) {
+                        $(this).parent().find('.pop').trigger('click');
+                        desIsOver_add=false;
+                    }
+                }else {
+                    if(desIsOver_add==true) {
+                        $(this).parent().find('.popover-content').text('部门描述不能为空');
+                        $(this).parent().find('.pop').css('visibility','hidden');
+                    }else {
+                        $(this).parent().find('.pop').trigger('click');
+                        $(this).parent().find('.popover-content').text('部门描述不能为空');
+                        $(this).parent().find('.pop').css('visibility','hidden');
+                        desIsOver_add=true;
+                    }
+                }
+                if(($('#add-depart-des').val().length<20&&$('#add-depart-des').val().length>0)&&($('#add-depart-name').val().length<10&&$('#add-depart-name').val().length>0)){
+                    $('#btn-add').attr('disabled',false);
+                }else {
+                    $('#btn-add').attr('disabled',true);
+                }
+            });
+        };
+        function load() {
+            var limit = 4;
+            data(currPage, limit);
+            // createTable(1, limit, totalCount);
+            $('#callBackPager').extendPagination({
+                totalCount: totalCount,
+                limit: limit,
+                callback: function(curr, limit) {
+                    data(curr, limit);
+                }
+            });
+        }
+        function data(curr,limit) {
+            totalCount=parent.departData.length;
+            dataList=parent.departData;
+            createTable(curr,limit,totalCount)
+        }
+        function createTable(currPage, limit, total) {
+            var html=[], showNum=limit;
+            html.push('<table class="table table-striped ">');
+            html.push('<thead><tr><th>部门编号</th><th>部门名称</th><th>部门人数</th><th>部门描述</th><th>操作</th></thead><tbody>');
+            if(total - (currPage * limit) < 0) {
+                showNum = total - ((currPage - 1) * limit);
+            }
+            for(var i = 0; i < showNum; i++) {
+                html.push('<tr data-index='+(i+((currPage-1) * limit))+'>');
+                html.push('<td>' + dataList[i+((currPage-1) * limit)].id + '</td>');
+                html.push('<td>' + dataList[i+((currPage-1) * limit)].name + '</td>');
+                html.push('<td>' + dataList[i+((currPage-1) * limit)].num + '</td>');
+                html.push('<td>' + dataList[i+((currPage-1) * limit)].des + '</td>');
+                html.push('<td><button class="edit"><span class="iconfont icon-xiugai"></span>编辑</button><button class="del btn-danger"><span class="iconfont icon-shanchu"></span>删除</button><button class="select"><span class="iconfont icon-chazhao"></span>查看成员</button></td>');
+                html.push('</tr>');
+            }
+            html.push('</tbody></table>');
+            var $table=$('.table');
+            $table.empty();
+            $table.html(html.join(''));
+            $('.edit').click(function () {
+                $('#updateModal').modal();
+                $('#updateModal .popover').css('display','none');
+                $('#updateModal').find('.pop').css('visibility','visible');
+                var index=$(this).parents('tr').data('index');
+                $('#updateModal').find('#depart-name').val(parent.departData[index].name);
+                $('#updateModal').find('#depart-des').val( parent.departData[index].des);
+                $('#updateModal').find('#btn-save').off('click').click(function () {
+                    for(var i=0;i<parent.staffArr.data.records.length;i++){
+                        if(parent.departData[index].name==parent.staffArr.data.records[i].depart){
+                            parent.staffArr.data.records[i].depart=$('#updateModal').find('#depart-name').val();
+                        }
+                    }
+                    parent.departData[index].name=$('#updateModal').find('#depart-name').val();
+                    parent.departData[index].des=$('#updateModal').find('#depart-des').val();
+                    $("#updateModal").modal('hide');
+                    data(currPage, limit);
+                });
+            });
+            $('.del').click(function () {
+                $('#deleteModal').modal();
+                $('#btn-del').attr('disabled',true);
+                var index=$(this).parents('tr').data('index');
+                if(parent.departData[index].num===0){
+                    $('#btn-del').attr('disabled',false);
+                };
+                $('#deleteModal').find('#btn-del').off('click').click(function () {
+                    parent.departData.splice(index,1);
+                    $("#deleteModal").modal('hide');
+                    load();
+                });
+            });
+            $('.select').click(function () {
+                var index=$(this).parents('tr').data('index');
+                var departID=parent.departData[index].id;
+                location.href='staff.html?id='+departID;
+                parent.$('.nav.nav-stacked li a').removeClass('active');
+                parent.$('.nav.nav-stacked li:eq(2) a').addClass('active');
+            });
+        };
+    </script>
+</body>
+</html>

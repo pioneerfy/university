@@ -1,0 +1,576 @@
+body,html{
+    min-width: 568px;
+    overflow: visible;
+}
+/*分割线*/
+.hr{
+    width: 95%;
+    height: 4px;
+    margin: 20px auto;
+    position: relative;
+    min-width: 568px;
+}
+.marquee1{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to left, #7b4397, #2196f3);
+}
+.marquee-in{
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: linear-gradient(to left, #97931a, #2196f3,#e76243);
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    color: transparent;
+}
+.name{
+    color: #acc71c;
+}
+.icon-tongzhi{
+    line-height: 60px;
+    font-size: 35px;
+    color: #FFFFFF;
+    float: left;
+    margin-left: 100px;
+}
+/*头部四个小标签*/
+.top{
+    width: 95%;
+    margin: 0 auto;
+    padding: 30px 0 ;
+}
+.top-ul{
+    width: 100%;
+    min-height: 220px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+.top-ul li{
+    background-color: #ffffff;
+    border: 1px solid #d3d3d3;
+    height: 220px;
+    width: 260px;
+    border-radius: 3px;
+    overflow: hidden;
+    cursor: pointer;
+    text-align: center;
+}
+.top-ul li:hover{
+    box-shadow: 0 5px 10px -2px #b3b3b3;
+}
+.top-ul li:hover .li-content-h2{
+    color: #000000;
+}
+.li-top{
+    width: 100%;
+    height: 4px;
+}
+.top-ul li:nth-of-type(1) .li-top{
+    background-color: #e7de20;
+}
+.top-ul li:nth-of-type(2) .li-top{
+    background-color: #6460e7;
+}
+.top-ul li:nth-of-type(3) .li-top{
+    background-color: #e76243;
+}
+.top-ul li:nth-of-type(4) .li-top{
+    background-color: #c217e7;
+}
+.li-content{
+    padding-top: 10px;
+    text-align: center;
+}
+.li-content-h2{
+    color: #8b8b8b;
+    font-size: 17px;
+    background-color: rgba(80, 154, 231, 0.23);
+}
+caption{
+    text-align: center;
+}
+th{
+    color: #1b1b1b;
+    text-align: center;
+}
+td{
+    width: 44px;
+    font-size: 14px;
+    height: 20px;
+    border: 1px solid #e8e8e8;
+}
+.not{
+    color: #bebebe;
+ }
+.charts-in{
+    width: 160px;
+    height: 160px;
+    margin: 0 auto;
+    border-radius: 50%;
+    border: 8px solid #6460e7;
+    position: relative;
+    overflow: hidden;
+    z-index: 3;
+}
+
+.water {
+    background: url("../images/homepage/water.png") repeat-x;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 0;
+    -webkit-animation: move_wave 4s linear infinite;
+    animation: move_wave 4s linear infinite;
+}
+.water>p{
+    margin-top: 20px;
+    color: #FFFFFF;
+    font-size: 20px;
+    animation: dd 1s infinite alternate;
+}
+@keyframes dd {
+    from{
+        transform: translateY(-4px);
+    }
+    to{
+        transform: translateY(4px);
+    }
+}
+@-webkit-keyframes move_wave {
+    0% { background-position:0 0 }
+    to { background-position:532px 0 }
+}
+
+@keyframes move_wave {
+    0% { background-position:0 0 }
+    to { background-position:532px 0 }
+}
+.w1 {
+    opacity: .5;
+    background-position: 120px 0;
+    -webkit-animation: move_wave 10s linear infinite;
+    animation: move_wave 10s linear infinite;
+}
+
+.w2 {
+    opacity: .3;
+    background-position: 60px 0;
+    -webkit-animation: move_wave 8s linear infinite;
+    animation: move_wave 8s linear infinite;
+}
+.charts{
+    width: 100%;
+    height: 180px;
+    margin-top: 10px;
+    padding: 0 5px;
+    overflow: hidden;
+}
+.charts3-in-line{
+    height: 28px;
+    width: 100%;
+}
+.label1{
+    float: left;
+    color: #444444;
+    line-height: 28px;
+    font-size: 12px;
+    width: 100px;
+    text-align: right;
+}
+.power {
+    float: left;
+    width: 130px;
+    margin-top: 10px;
+    height: 8px;
+    background-color: #c8c8c8;
+    position: relative;
+    margin-left: 5px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.power-in{
+    width: 0;
+    height: 8px;
+    background-color: #e76243;
+}
+.charts4{
+    overflow: hidden;
+}
+.chars4-in{
+    width: 92%;
+    height: 150px;
+    margin: 0 auto ;
+    border-left: 2px solid #c217e7;
+    border-bottom: 2px solid #c217e7;
+    overflow: hidden;
+    position: relative;
+}
+.col{
+    position: absolute;
+    bottom: 0;
+    width: 22px;
+    height: 0;
+    color: #FFFFFF;
+}
+.col:nth-of-type(1){
+    left: 15px;
+    background-color: #62a2f6;
+}
+.col:nth-of-type(2){
+    left: 65px;
+    background-color: #f1a0a0;
+}
+.col:nth-of-type(3){
+    left: 115px;
+    background-color: #71f6e9;
+}
+.col:nth-of-type(4){
+    left: 165px;
+    background-color: #ffae22;
+}
+.parts-nums{
+    display: none;
+}
+.charts4-text{
+    width: 92%;
+    margin: 0 auto;
+    font-size: 10px;
+    position: relative;
+}
+.charts4-text-p{
+    position: absolute;
+    left: 15px;
+    top: 0;
+    text-align: center;
+}
+.charts4-text-p:nth-of-type(2){
+    left: 65px;
+}
+.charts4-text-p:nth-of-type(3){
+    left: 115px;
+}
+.charts4-text-p:nth-of-type(4){
+    left: 165px;
+}
+/*底部公告和轮播*/
+.line{
+    width: 1148px;
+    min-height: 300px;
+    margin: 0 auto;
+    padding: 30px 25px;
+}
+.announcement{
+    width: 400px;
+    height: 240px;
+    background-color: #ffffff;
+    position: relative;
+    border-radius: 0 6px 6px 6px;
+    float: left;
+}
+.announcement:hover{
+    box-shadow: 0 5px 10px -2px #b3b3b3;
+}
+.circular{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: linear-gradient(to left, #7b4397, #2196f3);
+    position: absolute;
+    left: -25px;
+    top: -15px;
+    text-align: center;
+    line-height: 55px;
+    animation: xz 6s linear infinite;
+    transform: rotate(0);
+
+}
+@keyframes xz {
+    from{
+        transform: rotate(0);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+.announcement-top{
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    border-radius: 0 6px 0 0;
+    border-bottom: 1px solid #dfdfdf;
+}
+.icon-shengyin{
+    color: #FFFFFF;
+    font-size: 20px;
+    vertical-align: middle;
+}
+.announcement-content{
+    width: 100%;
+    height: 200px;
+    padding: 20px;
+    border-radius:  0 0 6px 6px;
+}
+.word{
+    cursor: pointer;
+    margin-bottom: 7px;
+    color: #636363;
+    height: 22px;
+    line-height: 22px;
+}
+.text{
+    float: left;
+    margin-left: 5px;
+    font-size: 14px;
+}
+.word:hover{
+    color: #000000;
+}
+.word>.iconfont{
+    float: left;
+    font-size: 16px;
+}
+.pm{
+    color: #444444;
+    width: 60%;
+    margin: 0 auto;
+}
+.time{
+    float: right;
+    font-size: 12px;
+}
+/*轮播*/
+.swiper-container{
+    float: right;
+    width: 600px;
+    height: 280px;
+    cursor: pointer;
+}
+.swiper-slide img{
+    width: 100%;
+    height: 100%;
+}
+.swiper-button-prev,.swiper-button-next{
+    background: none;
+    text-align: center;
+    opacity: 0.5;
+}
+.icon-left,.icon-right{
+    line-height: 44px;
+    font-size: 30px;
+    color: #d0d0d0;
+}
+.swiper-container:hover .swiper-button{
+    opacity: 1;
+}
+.swiper-pagination-bullet{
+    background-color: #ffffff;
+}
+.swiper-pagination-bullet-active{
+    background-color: #219fff;
+}
+@media screen and (max-width: 1170px){
+    .line{
+        width: 996px;
+    }
+    .announcement{
+        width: 350px;
+        height: 210px;
+    }
+    .circular{
+        width: 40px;
+        height: 40px;
+        left: -20px;
+        top: -10px;
+        line-height: 40px;
+    }
+    .announcement-top{
+        height: 30px;
+        font-size: 14px;
+        line-height: 30px;
+    }
+    .announcement-content{
+        height: 180px;
+        padding: 10px;
+    }
+    .word>.iconfont{
+        font-size: 15px;
+        line-height: 20px;
+    }
+    .text{
+        font-size: 12px;
+        height: 20px;
+        line-height: 20px;
+    }
+    .swiper-container{
+        width: 580px;
+        height: 260px;
+    }
+    .top-ul{
+        height: 200px;
+    }
+    .top-ul li{
+        width: 240px;
+    }
+    .li-content{
+        padding-top: 5px;
+    }
+    td{
+        width: 38px;
+        height: 18px;
+    }
+    .charts{
+        margin-top: 5px;
+    }
+    .charts3-in,.charts-in{
+        margin-top: 10px;
+    }
+    .charts4{
+        margin: 15px auto;
+    }
+    .charts-in{
+        width: 140px;
+        height: 140px;
+        border: 6px solid #6460e7;
+    }
+    .water>p{
+        font-size: 16px;
+    }
+    .label1{
+        width: 100px;
+    }
+    .power{
+        width: 120px;
+    }
+}
+@media screen and (max-width: 1014px){
+    .top-ul{
+        width: 85%;
+        min-width: 665px;
+        flex-wrap: wrap;
+        height: auto;
+    }
+    .top-ul li{
+        flex-basis: 325px;
+        display: block;
+        margin-bottom: 10px;
+    }
+    .label1{
+        width: 130px;
+        font-size: 12px;
+        text-overflow:ellipsis;
+    }
+    .power{
+        width: 150px;
+    }
+    .water>p{
+        font-size: 20px;
+    }
+    .li-content{
+        padding-top: 10px;
+    }
+    td{
+        width: 44px;
+        height: 20px;
+    }
+    .line{
+        max-width: 100%;
+    }
+    .announcement,.swiper-container{
+        float: none;
+        margin: 20px auto;
+    }
+    .announcement{
+        width: 600px;
+        height: auto;
+    }
+    .circular{
+        width: 65px;
+        height: 65px;
+        line-height: 60px;
+        top: -15px;
+        left: -33px;
+    }
+    .announcement-content{
+        width: 100%;
+        height: 230px;
+    }
+    .announcement-top{
+        width: 100%;
+        height: 55px;
+        line-height: 55px;
+        font-size: 18px;
+    }
+    .swiper-container{
+        width: 600px;
+        height: 300px;
+    }
+    .word{
+        height: 24px;
+        line-height: 24px;
+        margin-bottom: 15px;
+    }
+    .text,.word>.iconfont{
+        font-size: 16px;
+        line-height: 24px;
+
+    }
+    .time{
+        font-size: 14px;
+    }
+    .col:nth-of-type(1){
+        left: 20px;
+    }
+    .col:nth-of-type(2){
+        left: 80px;
+    }
+    .col:nth-of-type(3){
+        left: 140px;
+    }
+    .col:nth-of-type(4){
+        left: 200px;
+    }
+    .charts4-text-p:nth-of-type(1){
+        left: 20px;
+    }
+    .charts4-text-p:nth-of-type(2){
+        left: 80px;
+    }
+    .charts4-text-p:nth-of-type(3){
+        left: 140px;
+    }
+    .charts4-text-p:nth-of-type(4){
+        left: 200px;
+    }
+}
+@media screen and (max-width: 770px){
+    .top-ul{
+        width: 100%;
+        flex-wrap: wrap;
+        height: auto;
+    }
+    .top-ul li{
+        flex-basis: 360px;
+        margin: 0 auto 10px;
+    }
+    .line{
+        padding-left: 35px;
+    }
+    .hr{
+        width: 100%;
+    }
+    .announcement{
+        width: 500px;
+    }
+    .swiper-container{
+        width: 500px;
+    }
+}

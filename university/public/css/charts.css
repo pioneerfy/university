@@ -1,0 +1,52 @@
+body,html{
+    min-width: 420px;
+}
+.header-h1>span{
+    cursor: pointer;
+}
+.header-h1{
+    height: 100%;
+    line-height: 60px;
+}
+.icon-shuju{
+    font-size: 20px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+.attendance,.school,.nums{
+    width: 95%;
+    height: auto;
+    margin: 15px auto;
+
+}
+.school{
+    margin-top: 40px;
+}
+.attendance-left,.school-left,.nums-left{
+    width: 49.5%;
+    height: 380px;
+    background-color: #FFFFFF;
+    padding-top: 5px;
+    float: left;
+    box-shadow: 0 -1px 10px #e8e8e8;
+}
+.attendance-right,.school-right,.nums-right{
+    width: 49.5%;
+    height: 380px;
+    background-color: #FFFFFF;
+    padding-top: 5px;
+    float: right;
+    box-shadow: 0 -1px 10px #e8e8e8;
+}
+@media screen and (max-width: 900px){
+    .attendance-left,.school-left,.nums-left,.attendance-right,.school-right,.nums-right{
+        float: none;
+        width: 80%;
+        margin: 0 auto 15px;
+    }
+}
+@media screen and (max-width: 700px){
+    .attendance-left,.school-left,.nums-left,.attendance-right,.school-right,.nums-right{
+        width: 95%;
+    }
+}
